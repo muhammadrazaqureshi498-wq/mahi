@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gold Calculator | Mahi Gold Rate</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="calculator.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ===========================
+            HEADER
+    ============================ -->
+
+    <header class="header">
+
+        <div class="logo-box">
+
+            <div class="logo">
+
+                <i class="fa-solid fa-coins"></i>
+
+            </div>
+
+            <div>
+
+                <h2>Mahi Gold Rate</h2>
+
+                <p>Gold Calculator</p>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- ===========================
+        PAGE TITLE
+    ============================ -->
+
+    <section class="page-title">
+
+        <h1>Gold Price Calculator</h1>
+
+        <p>
+
+            Calculate live gold prices instantly
+
+        </p>
+
+    </section>
+
+    <!-- ===========================
+        CALCULATOR CARD
+    ============================ -->
+
+    <section class="calculator-card">
+
+        <!-- Gold Type -->
+
+        <div class="input-group">
+
+            <label>
+
+                Gold Karat
+
+            </label>
+
+            <select id="goldType">
+
+                <option value="24">24K Gold</option>
+
+                <option value="22">22K Gold</option>
+
+                <option value="21">21K Gold</option>
+
+                <option value="18">18K Gold</option>
+
+            </select>
+
+        </div>
+
+        <!-- Weight Unit -->
+
+        <div class="input-group">
+
+            <label>
+
+                Weight Unit
+
+            </label>
+
+            <select id="weightUnit">
+
+                <option value="tola">
+
+                    Tola
+
+                </option>
+
+                <option value="gram">
+
+                    Gram
+
+                </option>
+
+                <option value="ounce">
+
+                    Troy Ounce
+
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- Weight -->
+
+        <div class="input-group">
+
+            <label>
+
+                Enter Weight
+
+            </label>
+
+            <input
+                type="number"
+                id="weightInput"
+                placeholder="Example: 2">
+
+        </div>
+
+        <!-- Button -->
+
+        <button id="calculateBtn">
+
+            <i class="fa-solid fa-calculator"></i>
+
+            Calculate Price
+
+        </button>
+
+    </section>
+
+    <!-- ===========================
+        RESULT CARD
+    ============================ -->
+
+    <section class="result-card">
+
+        <h3>
+
+            Estimated Gold Price
+
+        </h3>
+
+        <h1 id="totalPrice">
+
+            Rs 0
+
+        </h1>
+
+    </section>
+
+</div>
+
+<!-- ===========================
+Bottom Navigation
+=========================== -->
+
+<nav class="bottom-nav">
+
+    <a href="mahi.html" class="nav-item">
+
+        <i class="fa-solid fa-house"></i>
+
+        <span>Home</span>
+
+    </a>
+
+    <a href="calculator.html" class="nav-item active">
+
+        <i class="fa-solid fa-calculator"></i>
+
+        <span>Calculator</span>
+
+    </a>
+
+    <a href="chart.html" class="nav-item">
+
+        <i class="fa-solid fa-chart-line"></i>
+
+        <span>Chart</span>
+
+    </a>
+
+    <a href="setting.html" class="nav-item">
+
+        <i class="fa-solid fa-gear"></i>
+
+        <span>Settings</span>
+
+    </a>
+
+</nav>
+
+<!-- JavaScript -->
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="calculator.js"></script>
+
+</body>
+</html>

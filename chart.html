@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Chart - Mahi Gold Rate</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="chart.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+
+    <header class="header">
+
+        <a href="mahi.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+        <h1>Gold Chart</h1>
+
+        <button class="refresh-btn">
+            <i class="fa-solid fa-rotate-right"></i>
+        </button>
+
+    </header>
+
+    <!-- Live Price Card -->
+
+    <section class="live-card">
+
+        <h2>24K Gold</h2>
+
+        <h1 id="livePrice">
+            Rs 0
+        </h1>
+
+        <p class="live-status">
+            ● LIVE
+        </p>
+
+  <section class="karat-tabs">
+
+    <button class="karat-btn active" data-karat="24">24K</button>
+    <button class="karat-btn" data-karat="22">22K</button>
+    <button class="karat-btn" data-karat="21">21K</button>
+    <button class="karat-btn" data-karat="18">18K</button>
+
+</section>
+
+    <!-- Chart -->
+
+    <section class="chart-card">
+
+        <canvas id="goldChart"></canvas>
+
+    </section>
+
+ <!-- Time Buttons -->
+
+<section class="time-filter">
+
+    <button class="time-btn active" data-time="1D">1D</button>
+    <button class="time-btn" data-time="7D">7D</button>
+    <button class="time-btn" data-time="1M">1M</button>
+    <button class="time-btn" data-time="1Y">1Y</button>
+
+</section>
+
+    <!-- Market Stats -->
+
+    <section class="stats">
+
+        <div class="stat-card">
+            <h4>High</h4>
+            <p id="highPrice">Rs 0</p>
+        </div>
+
+        <div class="stat-card">
+            <h4>Low</h4>
+            <p id="lowPrice">Rs 0</p>
+        </div>
+
+        <div class="stat-card">
+            <h4>Open</h4>
+            <p id="openPrice">Rs 0</p>
+        </div>
+
+        <div class="stat-card">
+            <h4>Change</h4>
+            <p id="changePrice">0%</p>
+        </div>
+
+    </section>
+
+</div>
+
+<!-- Bottom Navigation -->
+
+<nav class="bottom-nav">
+
+    <a href="mahi.html">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+    </a>
+
+    <a href="calculator.html">
+        <i class="fa-solid fa-calculator"></i>
+        <span>Calculator</span>
+    </a>
+
+    <a href="chart.html" class="active">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Chart</span>
+    </a>
+
+    <a href="setting.html">
+        <i class="fa-solid fa-gear"></i>
+        <span>Settings</span>
+    </a>
+
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="js/config.js"></script>
+<script src="js/chart.js"></script>
+
+<canvas id="goldChart"></canvas>
+
+</body>
+</html>

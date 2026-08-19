@@ -1,0 +1,1020 @@
+/* =========================================
+   MAHI GOLD RATE - SETTINGS PAGE
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #0d0d0d;
+    color: #ffffff;
+    min-height: 100vh;
+    padding-bottom: 90px;
+}
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 25px 20px;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+    margin-bottom: 25px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo-icon {
+    width: 55px;
+    height: 55px;
+    background: #ffd700;
+    color: #111;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 23px;
+
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.25);
+}
+
+.logo h2 {
+    color: #ffd700;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.logo p {
+    color: #999;
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+/* =========================================
+   COMMON CARD
+========================================= */
+
+.card {
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 18px;
+    padding: 20px;
+
+    margin-bottom: 20px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+/* =========================================
+   PROFILE
+========================================= */
+
+.profile-card {
+    display: flex;
+    align-items: center;
+}
+
+.profile-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.avatar {
+    width: 55px;
+    height: 55px;
+
+    background: #252525;
+    border: 1px solid rgba(255, 215, 0, 0.25);
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #ffd700;
+    font-size: 22px;
+}
+
+.profile-left h3 {
+    font-size: 17px;
+    margin-bottom: 3px;
+}
+
+.profile-left span {
+    color: #999;
+    font-size: 13px;
+}
+
+/* =========================================
+   SETTINGS LIST
+========================================= */
+
+.settings-list {
+    background: #1a1a1a;
+
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    margin-bottom: 20px;
+}
+
+/* =========================================
+   SETTING ITEM
+========================================= */
+
+.setting-item {
+    min-height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 15px 18px;
+
+    border-bottom: 1px solid #292929;
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.setting-item > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.setting-item i {
+    width: 22px;
+    color: #ffd700;
+    font-size: 17px;
+}
+
+.setting-item span {
+    font-size: 14px;
+    color: #ffffff;
+}
+
+/* =========================================
+   SELECT
+========================================= */
+
+.setting-item select {
+    width: 100px;
+
+    padding: 9px 10px;
+
+    border: 1px solid #333;
+    border-radius: 8px;
+
+    background: #292929;
+    color: #ffffff;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+.setting-item select:focus {
+    border-color: #ffd700;
+}
+
+/* =========================================
+   TOGGLE SWITCH
+========================================= */
+
+.switch {
+    position: relative;
+
+    width: 48px;
+    height: 26px;
+
+    flex-shrink: 0;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+
+    inset: 0;
+
+    background: #444;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.slider::before {
+    content: "";
+
+    position: absolute;
+
+    width: 20px;
+    height: 20px;
+
+    left: 3px;
+    top: 3px;
+
+    background: #ffffff;
+
+    border-radius: 50%;
+
+    transition: 0.3s;
+}
+
+.switch input:checked + .slider {
+    background: #ffd700;
+}
+
+.switch input:checked + .slider::before {
+    transform: translateX(22px);
+}
+
+/* =========================================
+   ABOUT CARD
+========================================= */
+
+.about-card h3 {
+    color: #ffd700;
+    font-size: 18px;
+
+    margin-bottom: 15px;
+}
+
+.about-card p {
+    color: #aaa;
+    font-size: 13px;
+
+    margin-bottom: 7px;
+}
+
+.about-card p:last-child {
+    margin-bottom: 0;
+}
+
+/* =========================================
+   LOGOUT BUTTON
+========================================= */
+
+.logout-btn {
+    width: 100%;
+
+    padding: 14px;
+
+    border: 1px solid #333;
+    border-radius: 10px;
+
+    background: #1b1b1b;
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background: #2a2a2a;
+    border-color: #ffd700;
+    color: #ffd700;
+}
+
+/* =========================================
+   BOTTOM NAVIGATION
+========================================= */
+
+.bottom-nav {
+    position: fixed;
+
+    left: 50%;
+    bottom: 0;
+
+    transform: translateX(-50%);
+
+    width: 100%;
+    max-width: 600px;
+
+    height: 70px;
+
+    background: #171717;
+
+    border-top: 1px solid rgba(255, 215, 0, 0.2);
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    z-index: 1000;
+}
+
+.bottom-nav a {
+    text-decoration: none;
+
+    color: #888;
+
+    font-size: 11px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    width: 25%;
+
+    transition: 0.3s;
+}
+
+.bottom-nav a i {
+    font-size: 19px;
+}
+
+.bottom-nav a.active {
+    color: #ffd700;
+}
+
+.bottom-nav a:hover {
+    color: #ffd700;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 20px 15px;
+    }
+
+    .logo h2 {
+        font-size: 21px;
+    }
+
+    .logo-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 21px;
+    }
+
+    .setting-item {
+        padding: 14px 15px;
+    }
+
+    .setting-item span {
+        font-size: 13px;
+    }
+
+    .bottom-nav {
+        height: 65px;
+    }
+}
+
+
+
+/* ========================================
+   LIGHT MODE
+======================================== */
+
+body.light-mode {
+    background: #f5f5f5;
+    color: #111;
+}
+
+body.light-mode .card,
+body.light-mode .setting-item {
+    background: #ffffff;
+    color: #111;
+}
+
+body.light-mode .bottom-nav {
+    background: #ffffff;
+}
+
+body.light-mode .bottom-nav a {
+    color: #555;
+}
+
+body.light-mode .bottom-nav a.active {
+    color: #d4a900;
+}
+
+
+/* ========================================
+   MAHI GOLD RATE - LIGHT THEME
+======================================== */
+
+body.light-mode {
+    background: #f5f6f8;
+    color: #222;
+}
+
+
+/* Header */
+
+body.light-mode .header h2 {
+    color: #d4a900;
+}
+
+body.light-mode .header p {
+    color: #777;
+}
+
+
+/* Logo */
+
+body.light-mode .logo-icon {
+    background: #FFD700;
+    color: #111;
+}
+
+
+/* Profile Card */
+
+body.light-mode .card {
+    background: #ffffff;
+    color: #222;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Profile */
+
+body.light-mode .profile-card h3 {
+    color: #222;
+}
+
+body.light-mode .profile-card span {
+    color: #888;
+}
+
+
+/* Avatar */
+
+body.light-mode .avatar {
+    background: #222;
+    color: #FFD700;
+    border: 1px solid #FFD700;
+}
+
+
+/* Settings */
+
+body.light-mode .settings-list {
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Setting Row */
+
+body.light-mode .setting-item {
+    background: #ffffff;
+    color: #222;
+    border-bottom: 1px solid #eeeeee;
+}
+
+
+/* Last Row */
+
+body.light-mode .setting-item:last-child {
+    border-bottom: none;
+}
+
+
+/* Setting Icons */
+
+body.light-mode .setting-item i {
+    color: #e0b400;
+}
+
+
+/* Setting Text */
+
+body.light-mode .setting-item span {
+    color: #333;
+}
+
+
+/* Currency Select */
+
+body.light-mode .setting-item select {
+    background: #292929;
+    color: #ffffff;
+    border: none;
+}
+
+
+/* Switch OFF */
+
+body.light-mode .slider {
+    background: #d0d0d0;
+}
+
+
+/* Switch ON */
+
+body.light-mode input:checked + .slider {
+    background: #FFD700;
+}
+
+
+/* About Card */
+
+body.light-mode .about-card {
+    background: #ffffff;
+    color: #222;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+body.light-mode .about-card h3 {
+    color: #e0b400;
+}
+
+
+body.light-mode .about-card p {
+    color: #777;
+}
+
+
+/* Logout */
+
+body.light-mode .logout-btn {
+    background: #292929;
+    color: #ffffff;
+}
+
+
+body.light-mode .logout-btn:hover {
+    background: #111111;
+}
+
+
+/* Bottom Navigation */
+
+body.light-mode .bottom-nav {
+    background: #ffffff;
+    border-top: 1px solid #e5e5e5;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Navigation Links */
+
+body.light-mode .bottom-nav a {
+    color: #777;
+}
+
+
+body.light-mode .bottom-nav a.active {
+    color: #d4a900;
+}
+
+
+body.light-mode .bottom-nav i {
+    color: inherit;
+}
+
+/* ========================================
+   PRICE ALERT
+======================================== */
+
+.alert-card h3 {
+    color: #ffd700;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.alert-card h3 i {
+    margin-right: 8px;
+}
+
+.alert-description {
+    color: #999;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.alert-form {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.alert-form label {
+    color: #ddd;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.alert-form select,
+.alert-form input {
+    width: 100%;
+    padding: 12px 13px;
+
+    background: #292929;
+    color: #fff;
+
+    border: 1px solid #3a3a3a;
+    border-radius: 9px;
+
+    outline: none;
+}
+
+.alert-form select:focus,
+.alert-form input:focus {
+    border-color: #ffd700;
+}
+
+.save-alert-btn {
+    width: 100%;
+
+    margin-top: 10px;
+    padding: 13px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: #ffd700;
+    color: #111;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.save-alert-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, .25);
+}
+
+.alert-status {
+    margin-top: 15px;
+
+    padding: 10px;
+
+    border-radius: 8px;
+
+    background: #222;
+
+    color: #aaa;
+
+    font-size: 13px;
+
+    display: none;
+}
+
+.alert-status.show {
+    display: block;
+}
+
+/* ========================================
+   ACTIVE PRICE ALERT
+======================================== */
+
+.active-alert-card {
+    position: relative;
+}
+
+.active-alert-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin-bottom: 20px;
+}
+
+.active-alert-header h3 {
+    color: #ffd700;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.active-alert-header h3 i {
+    margin-right: 7px;
+}
+
+.active-alert-header p {
+    color: #888;
+    font-size: 12px;
+}
+
+
+/* ========================================
+   ALERT BADGE
+======================================== */
+
+.alert-badge {
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    background: #333;
+
+    color: #999;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.alert-badge.active {
+    background: rgba(255, 215, 0, 0.15);
+    color: #ffd700;
+}
+
+
+/* ========================================
+   ALERT INFORMATION
+======================================== */
+
+.alert-info {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    margin-bottom: 18px;
+}
+
+.alert-info-item {
+    background: #242424;
+
+    border-radius: 10px;
+
+    padding: 13px;
+}
+
+.alert-info-item span {
+    display: block;
+
+    color: #888;
+
+    font-size: 11px;
+
+    margin-bottom: 5px;
+}
+
+.alert-info-item strong {
+    color: #fff;
+
+    font-size: 15px;
+}
+
+
+/* ========================================
+   DELETE BUTTON
+======================================== */
+
+.delete-alert-btn {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #444;
+
+    border-radius: 9px;
+
+    background: #242424;
+
+    color: #ddd;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    transition: .3s;
+}
+
+.delete-alert-btn:hover {
+    background: #351b1b;
+
+    border-color: #a33;
+
+    color: #ff7777;
+}
+
+
+/* ========================================
+   LIGHT THEME
+======================================== */
+
+body.light-mode .active-alert-card {
+    background: #fff;
+
+    border-color: #e5e5e5;
+}
+
+body.light-mode .active-alert-header p {
+    color: #888;
+}
+
+body.light-mode .alert-info-item {
+    background: #f5f5f5;
+}
+
+body.light-mode .alert-info-item span {
+    color: #777;
+}
+
+body.light-mode .alert-info-item strong {
+    color: #222;
+}
+
+body.light-mode .delete-alert-btn {
+    background: #f5f5f5;
+
+    color: #444;
+
+    border-color: #ddd;
+}
+
+
+/* =================================
+   PRICE ALERT SETUP
+================================= */
+
+.alert-setup {
+    margin-top: 20px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.section-title i {
+    color: #FFD700;
+    font-size: 20px;
+}
+
+.section-title h3 {
+    color: #FFD700;
+    font-size: 18px;
+}
+
+
+/* Form */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    color: #aaa;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+
+/* Select */
+
+.form-group select {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: 1px solid #333;
+
+    border-radius: 10px;
+
+    background: #252525;
+
+    color: #fff;
+
+    outline: none;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+
+/* Price Input */
+
+.price-input {
+
+    display: flex;
+
+    align-items: center;
+
+    background: #252525;
+
+    border: 1px solid #333;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.price-input span {
+
+    padding-left: 14px;
+
+    color: #FFD700;
+
+    font-weight: 600;
+}
+
+.price-input input {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #fff;
+
+    font-size: 14px;
+}
+
+
+/* Save Alert Button */
+
+.alert-save-btn {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #FFD700;
+
+    color: #111;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.alert-save-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 20px
+        rgba(255, 215, 0, .25);
+}
+
+.alert-save-btn i {
+    margin-right: 7px;
+}

@@ -1,0 +1,671 @@
+/* ===========================
+   Google Font
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#0d0d0d;
+    color:#fff;
+    min-height:100vh;
+}
+
+.container{
+    width:100%;
+    max-width:1200px;
+    margin:auto;
+    padding:30px;
+}
+
+/* ===========================
+ Header
+=========================== */
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#171717;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    padding:20px 30px;
+    margin-bottom:25px;
+}
+
+.logo-box{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.logo{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#FFD700,#C8A200);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#111;
+    font-size:28px;
+}
+
+.heading h1{
+    font-size:28px;
+    font-weight:700;
+    color:#FFD700;
+}
+
+.heading p{
+    color:#aaa;
+    margin-top:4px;
+}
+
+.refresh-btn{
+    width:55px;
+    height:55px;
+    border:none;
+    border-radius:50%;
+    background:#FFD700;
+    color:#111;
+    cursor:pointer;
+    font-size:20px;
+    transition:.3s;
+}
+
+.refresh-btn:hover{
+    transform:rotate(180deg);
+}
+
+/* ===========================
+ Update Bar
+=========================== */
+
+.update-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#171717;
+    border-radius:18px;
+    padding:20px;
+    margin-bottom:30px;
+}
+
+.update-bar h4{
+    color:#FFD700;
+    margin-bottom:5px;
+}
+
+.update-bar p{
+    color:#bbb;
+}
+
+.live-status{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#00ff6a;
+    font-weight:600;
+}
+
+.live-status span{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:#00ff6a;
+}
+
+/* ===========================
+ Main Title
+=========================== */
+
+.main-title{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.main-title h2{
+    font-size:42px;
+    color:#FFD700;
+    margin-bottom:10px;
+}
+
+.main-title p{
+    color:#999;
+}
+
+/* ===========================
+ Gold Cards
+=========================== */
+
+.gold-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.gold-card{
+    background:#171717;
+    border-radius:22px;
+    padding:25px;
+    border:1px solid rgba(255,215,0,.15);
+    transition:.4s;
+}
+
+.gold-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 15px 35px rgba(255,215,0,.18);
+}
+
+.card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.card-top h3{
+    color:#FFD700;
+    font-size:22px;
+}
+
+.card-top i{
+    font-size:24px;
+    color:#FFD700;
+}
+
+.gold-card h1{
+    font-size:34px;
+    margin-bottom:18px;
+}
+
+.change{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 18px;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.up{
+    background:rgba(0,255,106,.12);
+    color:#00ff6a;
+}
+
+.down{
+    background:rgba(255,60,60,.12);
+    color:#ff4d4d;
+}
+
+/* ==========================================
+   International Market Section
+========================================== */
+
+.market-section{
+    margin-top:40px;
+}
+
+.market-card{
+    background:#171717;
+    border:1px solid rgba(255,215,0,.15);
+    border-radius:22px;
+    padding:30px;
+    transition:.3s;
+}
+
+.market-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(255,215,0,.15);
+}
+
+.market-title{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.market-title i{
+    font-size:26px;
+    color:#FFD700;
+}
+
+.market-title h3{
+    font-size:24px;
+    color:#FFD700;
+}
+
+.market-body{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.market-item{
+    background:#111;
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:18px;
+    padding:25px;
+}
+
+.market-item span{
+    display:block;
+    color:#999;
+    margin-bottom:12px;
+    font-size:15px;
+}
+
+.market-item h2{
+    font-size:32px;
+    color:#fff;
+}
+
+.market-open{
+    color:#00ff66 !important;
+}
+
+/* ==========================================
+   Currency Section
+========================================== */
+
+.currency-section{
+    margin-top:35px;
+}
+
+.currency-card{
+    background:#171717;
+    border:1px solid rgba(255,215,0,.15);
+    border-radius:22px;
+    padding:30px;
+    transition:.3s;
+}
+
+.currency-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(255,215,0,.15);
+}
+
+.currency-header{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.currency-header i{
+    font-size:26px;
+    color:#FFD700;
+}
+
+.currency-header h3{
+    color:#FFD700;
+    font-size:24px;
+}
+
+.currency-body{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.currency-item{
+    background:#111;
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:18px;
+    padding:25px;
+}
+
+.currency-item span{
+    display:block;
+    color:#999;
+    margin-bottom:12px;
+}
+
+.currency-item h2{
+    color:#fff;
+    font-size:32px;
+}
+
+/* Bottom navigation */
+
+
+/*=========================
+ Bottom Navigation
+==========================*/
+
+.bottom-nav{
+
+    position:fixed;
+
+    bottom:20px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:92%;
+
+    max-width:1000px;
+
+    height:90px;
+
+    background:#111820;
+
+    border:1px solid rgba(255,215,0,.12);
+
+    border-radius:25px;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    backdrop-filter:blur(15px);
+
+    z-index:999;
+}
+
+.nav-item{
+
+    width:120px;
+
+    height:70px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#d1d1d1;
+
+    text-decoration:none;
+
+    transition:.3s;
+}
+
+.nav-item i{
+
+    font-size:24px;
+}
+
+.nav-item span{
+
+    font-size:16px;
+}
+
+.nav-item:hover{
+
+    color:#FFD700;
+}
+
+.nav-item.active{
+
+    background:rgba(255,215,0,.12);
+
+    color:#FFD700;
+}
+
+.nav-item.active i{
+
+    color:#FFD700;
+}
+
+/* ========================================
+   MARKET STATISTICS
+======================================== */
+
+.market-stats {
+
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 25px auto;
+
+    padding: 22px;
+
+    background: #151515;
+
+    border: 1px solid rgba(255, 215, 0, .15);
+
+    border-radius: 20px;
+
+}
+
+
+/* Header */
+
+.stats-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+.stats-header h2 {
+
+    color: #FFD700;
+
+    font-size: 21px;
+
+    margin-bottom: 4px;
+
+}
+
+.stats-header p {
+
+    color: #888;
+
+    font-size: 13px;
+
+}
+
+.stats-header > span {
+
+    padding: 7px 14px;
+
+    background: rgba(255, 215, 0, .12);
+
+    color: #FFD700;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+
+/* Grid */
+
+.stats-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+}
+
+
+/* Card */
+
+.stat-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 18px;
+
+    background: #202020;
+
+    border-radius: 15px;
+
+    border: 1px solid #2d2d2d;
+
+    transition: .3s;
+
+}
+
+.stat-card:hover {
+
+    transform: translateY(-3px);
+
+    border-color: rgba(255, 215, 0, .35);
+
+}
+
+
+/* Icon */
+
+.stat-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    min-width: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: rgba(255, 215, 0, .12);
+
+    color: #FFD700;
+
+}
+
+.stat-icon i {
+
+    font-size: 18px;
+
+}
+
+
+/* Text */
+
+.stat-card span {
+
+    display: block;
+
+    color: #888;
+
+    font-size: 11px;
+
+    margin-bottom: 5px;
+
+}
+
+.stat-card strong {
+
+    display: block;
+
+    color: #fff;
+
+    font-size: 16px;
+
+}
+
+.stat-card small {
+
+    color: #4ade80;
+
+    font-size: 11px;
+
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 800px) {
+
+    .stats-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .market-stats {
+
+        padding: 15px;
+
+    }
+
+    .stats-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .stats-header h2 {
+
+        font-size: 18px;
+
+    }
+
+}
+
+.stats-karat-buttons {
+    display: flex;
+    gap: 7px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.stats-karat {
+    border: 1px solid #333;
+    background: #222;
+    color: #999;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+}
+
+.stats-karat.active {
+    background: #FFD700;
+    color: #111;
+    border-color: #FFD700;
+}
