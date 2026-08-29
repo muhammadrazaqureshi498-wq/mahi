@@ -1,26 +1,30 @@
 // ========================================
-// MAHI GOLD RATE - CHART
-// VERSION 3
+// MAHI GOLD RATE - LIVE CHART
 // ========================================
 
+console.log("Chart JS Loaded");
+
 
 // ========================================
-// LOAD SETTINGS
+// LIVE GOLD DATA
 // ========================================
 
-const chartSettings =
-    JSON.parse(
-        localStorage.getItem("MAHI_SETTINGS")
-    ) || {
+let liveGold = JSON.parse(
+    localStorage.getItem("LIVE_GOLD")
+) || {
 
-        currency: "PKR",
-        autoRefresh: true,
-        darkMode: false,
-        priceAlert: false
+    gold24: 0,
+    gold22: 0,
+    gold21: 0,
+    gold18: 0,
 
-    };
+    usd: 0,
+    international: 0
 
-console.log("Chart Settings:", chartSettings);
+};
+
+
+console.log("Chart LIVE_GOLD:", liveGold);
 
 
 // ========================================
@@ -32,405 +36,233 @@ let currentPeriod = "1D";
 
 
 // ========================================
-// HISTORICAL DEMO DATA
-// ========================================
-//
-// IMPORTANT:
-// Last value will be replaced with LIVE_GOLD
-// current price.
-//
-
-const chartData = {
-
-    "24": {
-
-        "1D": [
-            423000,
-            424000,
-            422500,
-            423500,
-            424200,
-            423800,
-            423176
-        ],
-
-        "7D": [
-            418000,
-            419500,
-            420000,
-            421500,
-            422800,
-            423500,
-            423176
-        ],
-
-        "1M": [
-            398000,
-            401000,
-            404000,
-            408000,
-            412000,
-            418000,
-            423176
-        ],
-
-        "1Y": [
-            290000,
-            305000,
-            325000,
-            345000,
-            365000,
-            395000,
-            423176
-        ]
-
-    },
-
-
-    "22": {
-
-        "1D": [
-            387000,
-            388000,
-            387500,
-            388500,
-            389000,
-            388200,
-            387911
-        ],
-
-        "7D": [
-            382000,
-            383500,
-            384000,
-            385500,
-            386800,
-            387500,
-            387911
-        ],
-
-        "1M": [
-            365000,
-            368000,
-            372000,
-            377000,
-            381000,
-            385000,
-            387911
-        ],
-
-        "1Y": [
-            270000,
-            280000,
-            295000,
-            320000,
-            340000,
-            365000,
-            387911
-        ]
-
-    },
-
-
-    "21": {
-
-        "1D": [
-            369000,
-            370000,
-            369500,
-            370500,
-            371000,
-            370400,
-            370279
-        ],
-
-        "7D": [
-            365000,
-            366000,
-            367500,
-            368500,
-            369500,
-            370000,
-            370279
-        ],
-
-        "1M": [
-            350000,
-            353000,
-            357000,
-            362000,
-            366000,
-            369000,
-            370279
-        ],
-
-        "1Y": [
-            255000,
-            265000,
-            280000,
-            300000,
-            325000,
-            350000,
-            370279
-        ]
-
-    },
-
-
-    "18": {
-
-        "1D": [
-            316000,
-            317000,
-            316500,
-            317500,
-            318000,
-            317400,
-            317382
-        ],
-
-        "7D": [
-            312000,
-            313000,
-            314500,
-            315000,
-            316000,
-            317000,
-            317382
-        ],
-
-        "1M": [
-            300000,
-            302000,
-            305000,
-            309000,
-            312000,
-            315000,
-            317382
-        ],
-
-        "1Y": [
-            220000,
-            230000,
-            245000,
-            265000,
-            285000,
-            300000,
-            317382
-        ]
-
-    }
-
-};
-
-
-// ========================================
-// GET LIVE CURRENT PRICE
+// DOM
 // ========================================
 
-function getLivePrice(karat) {
+const livePrice =
+    document.getElementById("livePrice");
 
-    if (
-        typeof LIVE_GOLD === "undefined"
-    ) {
-
-        console.warn(
-            "LIVE_GOLD not available"
-        );
-
-        return null;
-
-    }
-
-
-    const price = Number(
-        LIVE_GOLD["gold" + karat]
-    );
-
-
-    if (!price || price <= 0) {
-
-        return null;
-
-    }
-
-
-    return price;
-
-}
-
-
-// ========================================
-// UPDATE LAST DATA POINT
-// ========================================
-
-function updateLiveChartPrice() {
-
-    const livePrice =
-        getLivePrice(currentKarat);
-
-
-    if (!livePrice) {
-
-        console.warn(
-            "Live price unavailable"
-        );
-
-        return;
-
-    }
-
-
-    chartData[currentKarat][currentPeriod]
-        [
-            chartData[currentKarat][currentPeriod].length - 1
-        ] = livePrice;
-
-
-    console.log(
-        "Chart Live Price:",
-        currentKarat,
-        livePrice
-    );
-
-}
-
-
-// ========================================
-// CANVAS
-// ========================================
-
-const canvas =
+const chartCanvas =
     document.getElementById("goldChart");
 
+const highPrice =
+    document.getElementById("highPrice");
 
-if (!canvas) {
+const lowPrice =
+    document.getElementById("lowPrice");
+
+const openPrice =
+    document.getElementById("openPrice");
+
+const changePrice =
+    document.getElementById("changePrice");
+
+
+// ========================================
+// CHECK CANVAS
+// ========================================
+
+if (!chartCanvas) {
 
     console.error(
-        "goldChart canvas not found"
+        "goldChart canvas not found!"
     );
 
-} else {
+}
 
 
-    const ctx =
-        canvas.getContext("2d");
+// ========================================
+// GET CURRENT KARAT PRICE
+// ========================================
+
+function getKaratPrice() {
+
+    if (currentKarat === "24") {
+        return Number(liveGold.gold24) || 0;
+    }
+
+    if (currentKarat === "22") {
+        return Number(liveGold.gold22) || 0;
+    }
+
+    if (currentKarat === "21") {
+        return Number(liveGold.gold21) || 0;
+    }
+
+    if (currentKarat === "18") {
+        return Number(liveGold.gold18) || 0;
+    }
+
+    return 0;
+}
 
 
-    // ========================================
-    // CREATE CHART
-    // ========================================
+// ========================================
+// LIVE PRICE
+// ========================================
 
-    const goldChart = new Chart(ctx, {
+function updateLivePrice() {
 
-        type: "line",
+    const price = getKaratPrice();
 
+    if (livePrice) {
 
-        data: {
+        livePrice.textContent =
+            "Rs " + price.toLocaleString();
 
-            labels: [
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "Today"
-            ],
+    }
 
-
-            datasets: [{
-
-                label: "Gold Price (PKR)",
-
-                data:
-                    chartData[
-                        currentKarat
-                    ][
-                        currentPeriod
-                    ],
-
-                borderColor: "#FFD700",
-
-                backgroundColor:
-                    "rgba(255,215,0,.15)",
-
-                fill: true,
-
-                tension: .4,
-
-                borderWidth: 3,
-
-                pointRadius: 5,
-
-                pointBackgroundColor:
-                    "#FFD700"
-
-            }]
-
-        },
+    console.log(
+        "Current Chart Price:",
+        price
+    );
+}
 
 
-        options: {
+// ========================================
+// CHART DATA
+// ========================================
 
-            responsive: true,
+function createChartData() {
 
-            maintainAspectRatio: false,
+    const currentPrice =
+        getKaratPrice();
 
 
-            plugins: {
+    // Agar live price available nahi
+    if (!currentPrice) {
 
-                legend: {
+        return [0];
 
-                    labels: {
+    }
 
-                        color: "#fff"
 
-                    }
+    // Current price ke around
+    // temporary chart points
 
-                }
+    return [
+
+        Math.round(currentPrice * 0.995),
+
+        Math.round(currentPrice * 0.998),
+
+        Math.round(currentPrice * 0.997),
+
+        Math.round(currentPrice * 1.001),
+
+        Math.round(currentPrice * 1.003),
+
+        Math.round(currentPrice * 1.001),
+
+        currentPrice
+
+    ];
+
+}
+
+
+// ========================================
+// CHART
+// ========================================
+
+let goldChart = null;
+
+
+function createChart() {
+
+    if (!chartCanvas) {
+        return;
+    }
+
+
+    const data =
+        createChartData();
+
+
+    const labels = [
+
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "Today"
+
+    ];
+
+
+    goldChart =
+        new Chart(chartCanvas, {
+
+            type: "line",
+
+            data: {
+
+                labels: labels,
+
+                datasets: [{
+
+                    label:
+                        currentKarat +
+                        "K Gold Price",
+
+                    data: data,
+
+                    borderColor: "#FFD700",
+
+                    backgroundColor:
+                        "rgba(255,215,0,0.15)",
+
+                    borderWidth: 3,
+
+                    pointRadius: 5,
+
+                    pointBackgroundColor:
+                        "#FFD700",
+
+                    fill: true,
+
+                    tension: 0.4
+
+                }]
 
             },
 
 
-            scales: {
+            options: {
 
-                x: {
+                responsive: true,
 
-                    ticks: {
+                maintainAspectRatio: false,
 
-                        color: "#fff"
+                plugins: {
 
-                    },
+                    legend: {
 
-                    grid: {
-
-                        color: "#333"
+                        display: true
 
                     }
 
                 },
 
+                scales: {
 
-                y: {
+                    y: {
 
-                    ticks: {
+                        ticks: {
 
-                        color: "#fff",
+                            callback: function(value) {
 
-                        callback: function(value) {
+                                return (
+                                    "Rs " +
+                                    Number(value)
+                                        .toLocaleString()
+                                );
 
-                            return "Rs " +
-                                Number(value)
-                                    .toLocaleString();
+                            }
 
                         }
-
-                    },
-
-                    grid: {
-
-                        color: "#333"
 
                     }
 
@@ -438,275 +270,334 @@ if (!canvas) {
 
             }
 
-        }
-
-    });
+        });
 
 
-    // ========================================
-    // UPDATE CHART
-    // ========================================
+    updateStats(data);
 
-    function updateChart() {
+}
 
 
-        // Get current LIVE price
+// ========================================
+// UPDATE CHART
+// ========================================
 
-        updateLiveChartPrice();
+function updateChart() {
 
-
-        // Get selected data
-
-        const data =
-            chartData[
-                currentKarat
-            ][
-                currentPeriod
-            ];
+    const data =
+        createChartData();
 
 
-        // Update chart
+    if (!goldChart) {
 
-        goldChart.data.datasets[0].data =
-            data;
-
-
-        // Update label
-
-        goldChart.data.datasets[0].label =
-            currentKarat + "K Gold Price";
-
-
-        // Update chart
-
-        goldChart.update();
-
-
-        // Update statistics
-
-        updateStats(data);
+        return;
 
     }
 
 
-    // ========================================
-    // UPDATE STATS
-    // ========================================
-
-    function updateStats(data) {
+    goldChart.data.datasets[0].data =
+        data;
 
 
-        const high =
-            Math.max(...data);
+    goldChart.data.datasets[0].label =
+        currentKarat + "K Gold Price";
 
 
-        const low =
-            Math.min(...data);
+    goldChart.update();
 
 
-        const open =
-            data[0];
+    updateStats(data);
+
+}
 
 
-        const close =
-            data[data.length - 1];
+// ========================================
+// UPDATE STATISTICS
+// ========================================
+
+function updateStats(data) {
+
+    if (!data || !data.length) {
+        return;
+    }
 
 
-        const change =
-            (
-                ((close - open) / open) *
-                100
-            ).toFixed(2);
+    const validData =
+        data.filter(value => value > 0);
 
 
-        const highElement =
-            document.getElementById(
-                "highPrice"
-            );
+    if (!validData.length) {
 
+        if (highPrice)
+            highPrice.textContent = "Rs 0";
 
-        const lowElement =
-            document.getElementById(
-                "lowPrice"
-            );
+        if (lowPrice)
+            lowPrice.textContent = "Rs 0";
 
+        if (openPrice)
+            openPrice.textContent = "Rs 0";
 
-        const openElement =
-            document.getElementById(
-                "openPrice"
-            );
+        if (changePrice)
+            changePrice.textContent = "0%";
 
-
-        const changeElement =
-            document.getElementById(
-                "changePercent"
-            );
-
-
-        if (highElement) {
-
-            highElement.textContent =
-                "Rs " +
-                high.toLocaleString();
-
-        }
-
-
-        if (lowElement) {
-
-            lowElement.textContent =
-                "Rs " +
-                low.toLocaleString();
-
-        }
-
-
-        if (openElement) {
-
-            openElement.textContent =
-                "Rs " +
-                open.toLocaleString();
-
-        }
-
-
-        if (changeElement) {
-
-            changeElement.textContent =
-                (change >= 0 ? "+" : "") +
-                change +
-                "%";
-
-        }
+        return;
 
     }
 
 
-    // ========================================
-    // KARAT BUTTONS
-    // ========================================
-
-    document
-        .querySelectorAll(".karat-btn")
-        .forEach(btn => {
+    const high =
+        Math.max(...validData);
 
 
-            btn.addEventListener(
-                "click",
-                function() {
+    const low =
+        Math.min(...validData);
 
 
-                    document
-                        .querySelectorAll(
-                            ".karat-btn"
-                        )
-                        .forEach(
-                            b =>
-                                b.classList
-                                    .remove(
-                                        "active"
-                                    )
-                        );
+    const open =
+        validData[0];
 
 
-                    this.classList
-                        .add("active");
+    const close =
+        validData[validData.length - 1];
 
 
-                    currentKarat =
-                        this.dataset.karat;
+    const change =
+        open > 0
+            ? ((close - open) / open) * 100
+            : 0;
 
 
-                    console.log(
-                        "Selected Karat:",
-                        currentKarat
-                    );
+    if (highPrice) {
+
+        highPrice.textContent =
+            "Rs " +
+            high.toLocaleString();
+
+    }
 
 
-                    updateChart();
+    if (lowPrice) {
 
-                }
+        lowPrice.textContent =
+            "Rs " +
+            low.toLocaleString();
 
-            );
-
-        });
-
-
-    // ========================================
-    // TIME BUTTONS
-    // ========================================
-
-    document
-        .querySelectorAll(".time-btn")
-        .forEach(btn => {
+    }
 
 
-            btn.addEventListener(
-                "click",
-                function() {
+    if (openPrice) {
+
+        openPrice.textContent =
+            "Rs " +
+            open.toLocaleString();
+
+    }
 
 
-                    document
-                        .querySelectorAll(
-                            ".time-btn"
-                        )
-                        .forEach(
-                            b =>
-                                b.classList
-                                    .remove(
-                                        "active"
-                                    )
-                        );
+    if (changePrice) {
 
-
-                    this.classList
-                        .add("active");
-
-
-                    currentPeriod =
-                        this.dataset.time;
-
-
-                    console.log(
-                        "Selected Period:",
-                        currentPeriod
-                    );
-
-
-                    updateChart();
-
-                }
-
-            );
-
-        });
-
-
-    // ========================================
-    // FIRST LOAD
-    // ========================================
-
-    updateChart();
-
-
-    // ========================================
-    // AUTO UPDATE CHART
-    // ========================================
-
-    if (chartSettings.autoRefresh) {
-
-
-        setInterval(
-            function() {
-
-                updateLiveChartPrice();
-
-                updateChart();
-
-            },
-            60000
-        );
+        changePrice.textContent =
+            (change >= 0 ? "+" : "") +
+            change.toFixed(2) +
+            "%";
 
     }
 
 }
+
+
+// ========================================
+// KARAT BUTTONS
+// ========================================
+
+document
+    .querySelectorAll(".karat-btn")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                document
+                    .querySelectorAll(".karat-btn")
+                    .forEach(btn => {
+
+                        btn.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+
+                this.classList.add("active");
+
+
+                currentKarat =
+                    this.dataset.karat;
+
+
+                console.log(
+                    "Selected Karat:",
+                    currentKarat + "K"
+                );
+
+
+                updateLivePrice();
+
+                updateChart();
+
+            }
+
+        );
+
+    });
+
+
+// ========================================
+// TIME BUTTONS
+// ========================================
+
+document
+    .querySelectorAll(".time-btn")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                document
+                    .querySelectorAll(".time-btn")
+                    .forEach(btn => {
+
+                        btn.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+
+                this.classList.add("active");
+
+
+                currentPeriod =
+                    this.dataset.time;
+
+
+                console.log(
+                    "Selected Period:",
+                    currentPeriod
+                );
+
+
+                updateChart();
+
+            }
+
+        );
+
+    });
+
+
+// ========================================
+// REFRESH BUTTON
+// ========================================
+
+const refreshBtn =
+    document.querySelector(".refresh-btn");
+
+
+if (refreshBtn) {
+
+    refreshBtn.addEventListener(
+        "click",
+        async function() {
+
+            refreshBtn.disabled = true;
+
+
+            try {
+
+                // API se fresh price lao
+
+                if (
+                    typeof getGoldPrice ===
+                    "function"
+                ) {
+
+                    await getGoldPrice();
+
+                }
+
+
+                // LocalStorage se fresh data
+
+                liveGold =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "LIVE_GOLD"
+                        )
+                    ) || liveGold;
+
+
+                updateLivePrice();
+
+                updateChart();
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Chart refresh error:",
+                    error
+                );
+
+            }
+
+
+            refreshBtn.disabled = false;
+
+        }
+    );
+
+}
+
+
+// ========================================
+// AUTO UPDATE
+// ========================================
+
+setInterval(function() {
+
+    const saved =
+        localStorage.getItem(
+            "LIVE_GOLD"
+        );
+
+
+    if (saved) {
+
+        liveGold =
+            JSON.parse(saved);
+
+
+        updateLivePrice();
+
+        updateChart();
+
+    }
+
+}, 60000);
+
+
+// ========================================
+// FIRST LOAD
+// ========================================
+
+updateLivePrice();
+
+createChart();
+
+console.log(
+    "Mahi Gold Chart Ready"
+);

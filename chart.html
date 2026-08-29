@@ -1,26 +1,46 @@
+
+
+
+
+
+<!-- New  -->
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gold Chart - Mahi Gold Rate</title>
+
+    <title>Gold Chart | Mahi Gold Rate</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet"
+    <link
+        rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <!-- CSS -->
     <link rel="stylesheet" href="chart.css">
+
 </head>
 
 <body>
 
 <div class="container">
 
-    <!-- Header -->
+    <!-- ================= HEADER ================= -->
 
     <header class="header">
 
@@ -28,116 +48,220 @@
             <i class="fa-solid fa-arrow-left"></i>
         </a>
 
-        <h1>Gold Chart</h1>
+        <div class="header-title">
 
-        <button class="refresh-btn">
-            <i class="fa-solid fa-rotate-right"></i>
-        </button>
+            <h1>Gold Chart</h1>
+
+            <p>Live International Gold Market</p>
+
+        </div>
+
+        <div class="live-dot">
+            <span></span>
+            LIVE
+        </div>
 
     </header>
 
-    <!-- Live Price Card -->
 
-    <section class="live-card">
+    <!-- ================= GOLD INFO ================= -->
 
-        <h2>24K Gold</h2>
+    <section class="gold-info">
 
-        <h1 id="livePrice">
-            Rs 0
-        </h1>
+        <div class="gold-info-left">
 
-        <p class="live-status">
-            ● LIVE
-        </p>
+            <div class="gold-icon">
 
-  <section class="karat-tabs">
+                <i class="fa-solid fa-coins"></i>
 
-    <button class="karat-btn active" data-karat="24">24K</button>
-    <button class="karat-btn" data-karat="22">22K</button>
-    <button class="karat-btn" data-karat="21">21K</button>
-    <button class="karat-btn" data-karat="18">18K</button>
+            </div>
 
-</section>
+            <div>
 
-    <!-- Chart -->
+                <h2>Gold</h2>
 
-    <section class="chart-card">
+                <p>XAU / USD</p>
 
-        <canvas id="goldChart"></canvas>
+            </div>
 
-    </section>
-
- <!-- Time Buttons -->
-
-<section class="time-filter">
-
-    <button class="time-btn active" data-time="1D">1D</button>
-    <button class="time-btn" data-time="7D">7D</button>
-    <button class="time-btn" data-time="1M">1M</button>
-    <button class="time-btn" data-time="1Y">1Y</button>
-
-</section>
-
-    <!-- Market Stats -->
-
-    <section class="stats">
-
-        <div class="stat-card">
-            <h4>High</h4>
-            <p id="highPrice">Rs 0</p>
         </div>
 
-        <div class="stat-card">
-            <h4>Low</h4>
-            <p id="lowPrice">Rs 0</p>
-        </div>
 
-        <div class="stat-card">
-            <h4>Open</h4>
-            <p id="openPrice">Rs 0</p>
-        </div>
+        <div class="market-status">
 
-        <div class="stat-card">
-            <h4>Change</h4>
-            <p id="changePrice">0%</p>
+            <span></span>
+
+            Market Data
+
         </div>
 
     </section>
+
+
+    <!-- ================= TRADINGVIEW ================= -->
+
+    <section class="chart-section">
+
+        <div class="chart-header">
+
+            <div>
+
+                <h2>Gold Price</h2>
+
+                <p>International XAU/USD</p>
+
+            </div>
+
+            <i class="fa-solid fa-chart-line"></i>
+
+        </div>
+
+
+        <div class="tradingview-widget-container">
+
+            <div
+                class="tradingview-widget-container__widget">
+            </div>
+
+            <script
+                type="text/javascript"
+                src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"
+                async>
+
+            {
+                "autosize": true,
+                "symbol": "OANDA:XAUUSD",
+                "interval": "60",
+                "timezone": "Asia/Karachi",
+                "theme": "dark",
+                "style": "3",
+                "locale": "en",
+                "allow_symbol_change": true,
+                "calendar": false,
+                "support_host": "https://www.tradingview.com"
+            }
+
+            </script>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= MARKET INFO ================= -->
+
+    <section class="market-info">
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                <i class="fa-solid fa-globe"></i>
+            </div>
+
+            <div>
+
+                <span>Market</span>
+
+                <strong>XAU / USD</strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                <i class="fa-solid fa-clock"></i>
+            </div>
+
+            <div>
+
+                <span>Timezone</span>
+
+                <strong>Pakistan</strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+
+            <div>
+
+                <span>Source</span>
+
+                <strong>TradingView</strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
 
 </div>
 
-<!-- Bottom Navigation -->
+
+<!-- ================= BOTTOM NAVIGATION ================= -->
 
 <nav class="bottom-nav">
 
-    <a href="mahi.html">
+    <a href="mahi.html" class="nav-item">
+
         <i class="fa-solid fa-house"></i>
+
         <span>Home</span>
+
     </a>
 
-    <a href="calculator.html">
+
+    <a href="calculator.html" class="nav-item">
+
         <i class="fa-solid fa-calculator"></i>
+
         <span>Calculator</span>
+
     </a>
 
-    <a href="chart.html" class="active">
+
+    <a
+        href="gold-rate-list.html"
+        class="active"
+    >
+
+        <i class="fa-solid fa-list"></i>
+
+        <span>Gold Rates</span>
+
+    </a>
+
+
+    <a href="chart.html" class="nav-item active">
+
         <i class="fa-solid fa-chart-line"></i>
+
         <span>Chart</span>
+
     </a>
 
-    <a href="setting.html">
+
+    <a href="setting.html" class="nav-item">
+
         <i class="fa-solid fa-gear"></i>
+
         <span>Settings</span>
+
     </a>
 
 </nav>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script src="js/config.js"></script>
-<script src="js/chart.js"></script>
-
-<canvas id="goldChart"></canvas>
 
 </body>
+
 </html>

@@ -12,418 +12,527 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
     <!-- Font Awesome -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    >
 
     <!-- CSS -->
     <link rel="stylesheet" href="setting.css">
-
-    <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <!-- Header -->
+    <!-- ========================================
+                    HEADER
+    ========================================= -->
 
-        <header class="header">
+    <header class="header">
 
-            <div class="logo">
+        <div class="logo">
 
-                <div class="logo-icon">
-                    <i class="fas fa-coins"></i>
-                </div>
+            <div class="logo-icon">
 
-                <div>
-
-                    <h2>Mahi Gold Rate</h2>
-
-                    <p>Settings</p>
-
-                </div>
+                <i class="fas fa-coins"></i>
 
             </div>
 
-        </header>
+            <div>
 
-        <!-- Profile -->
+                <h2>Mahi Gold Rate</h2>
 
-        <section class="card profile-card">
-
-            <div class="profile-left">
-
-                <div class="avatar">
-
-                    <i class="fas fa-user"></i>
-
-                </div>
-
-                <div>
-
-                    <h3>Muhammad Raza</h3>
-
-                    <span>Premium User</span>
-
-                </div>
+                <p>Settings</p>
 
             </div>
-
-        </section>
-
-        <!-- Settings -->
-
-        <section class="settings-list">
-
-            <div class="setting-item">
-
-                <div>
-                    <i class="fas fa-moon"></i>
-                    <span>Dark Mode</span>
-                </div>
-
-                <label class="switch">
-
-                    <input type="checkbox" id="darkMode">
-
-                    <span class="slider"></span>
-
-                </label>
-
-            </div>
-
-            <div class="setting-item">
-
-                <div>
-                    <i class="fas fa-bell"></i>
-                    <span>Price Alerts</span>
-                </div>
-
-                <label class="switch">
-
-                    <input type="checkbox" id="priceAlert">
-
-                    <span class="slider"></span>
-
-                </label>
-
-            </div>
-
-                <!-- ========================================
-     PRICE ALERT
-======================================== -->
-
-        <section class="card alert-card">
-
-    <h3>
-        <i class="fas fa-bell"></i>
-        Gold Price Alert
-    </h3>
-
-    <p class="alert-description">
-        Set a target price and get notified when gold reaches it.
-    </p>
-
-    <div class="alert-form">
-
-        <label for="alertKarat">
-            Gold Type
-        </label>
-
-        <select id="alertKarat">
-
-            <option value="24">24K Gold</option>
-            <option value="22">22K Gold</option>
-            <option value="21">21K Gold</option>
-            <option value="18">18K Gold</option>
-
-        </select>
-
-
-        <label for="alertPrice">
-            Target Price (PKR)
-        </label>
-
-        <input
-            type="number"
-            id="alertPrice"
-            placeholder="Example: 400000"
-            min="1"
-        >
-
-
-        <button
-            type="button"
-            id="saveAlertBtn"
-            class="save-alert-btn"
-        >
-
-            <i class="fas fa-bell"></i>
-            Set Price Alert
-
-        </button>
-
-    </div>
-
-    <div
-        id="alertStatus"
-        class="alert-status"
-    ></div>
-
-        </section>
-
-
-        <!-- ========================================
-     ACTIVE ALERT
-======================================== -->
-
-    <section class="card active-alert-card">
-
-    <div class="active-alert-header">
-
-        <div>
-            <h3>
-                <i class="fas fa-bell"></i>
-                Active Alert
-            </h3>
-
-            <p>
-                Your current gold price alert
-            </p>
-        </div>
-
-        <span id="alertBadge" class="alert-badge">
-            OFF
-        </span>
-
-    </div>
-
-
-    <div class="alert-info">
-
-        <div class="alert-info-item">
-
-            <span>Gold</span>
-
-            <strong id="activeAlertKarat">
-                --
-            </strong>
 
         </div>
 
+    </header>
 
-        <div class="alert-info-item">
 
-            <span>Target Price</span>
+    <!-- ========================================
+                    PROFILE
+    ========================================= -->
 
-            <strong id="activeAlertPrice">
-                --
-            </strong>
+    <section class="card profile-card">
+
+        <div class="profile-left">
+
+            <div class="avatar">
+
+                <i class="fas fa-user"></i>
+
+            </div>
+
+            <div>
+
+                <h3>Muhammad Raza</h3>
+
+                <span>Premium User</span>
+
+            </div>
 
         </div>
-
-    </div>
-
-
-    <button
-        type="button"
-        id="deleteAlertBtn"
-        class="delete-alert-btn"
-    >
-
-        <i class="fas fa-trash"></i>
-
-        Remove Alert
-
-    </button>
 
     </section>
 
 
-    <!-- ================================
-     PRICE ALERT SETUP
-================================ -->
+    <!-- ========================================
+                    SETTINGS
+    ========================================= -->
 
-<section class="card alert-setup">
+    <section class="settings-list">
 
-    <div class="section-title">
-        <i class="fas fa-bell"></i>
-        <h3>Set Price Alert</h3>
-    </div>
+        <!-- Dark Mode -->
 
-    <!-- Gold Type -->
-    <div class="form-group">
+        <div class="setting-item">
 
-        <label for="alertKarat">Gold Karat</label>
+            <div>
 
-        <select id="alertKarat">
+                <i class="fas fa-moon"></i>
 
-            <option value="24">24K Gold</option>
-            <option value="22">22K Gold</option>
-            <option value="21">21K Gold</option>
-            <option value="18">18K Gold</option>
+                <span>Dark Mode</span>
 
-        </select>
+            </div>
 
-    </div>
+            <label class="switch">
 
+                <input
+                    type="checkbox"
+                    id="darkMode"
+                >
 
-    <!-- Target Price -->
-    <div class="form-group">
+                <span class="slider"></span>
 
-        <label for="targetPrice">Target Price</label>
-
-        <div class="price-input">
-
-            <span>Rs</span>
-
-            <input
-                type="number"
-                id="targetPrice"
-                placeholder="Enter target price"
-            >
+            </label>
 
         </div>
 
-    </div>
 
+        <!-- Price Alerts -->
 
-    <!-- Condition -->
-    <div class="form-group">
+        <div class="setting-item">
 
-        <label for="alertCondition">Alert When Price</label>
+            <div>
 
-        <select id="alertCondition">
+                <i class="fas fa-bell"></i>
 
-            <option value="above">
-                Goes Above
-            </option>
-
-            <option value="below">
-                Goes Below
-            </option>
-
-        </select>
-
-    </div>
-
-
-    <!-- Save Button -->
-    <button class="alert-save-btn" id="saveAlert">
-
-        <i class="fas fa-bell"></i>
-
-        Set Alert
-
-    </button>
-
-</section>
-
-
-            <div class="setting-item">
-
-                <div>
-
-                    <i class="fas fa-rotate"></i>
-
-                    <span>Auto Refresh</span>
-
-                </div>
-
-                <label class="switch">
-
-                    <input type="checkbox" id="autoRefresh" checked>
-
-                    <span class="slider"></span>
-
-                </label>
+                <span>Price Alerts</span>
 
             </div>
 
-            <div class="setting-item">
+            <label class="switch">
 
-                <div>
+                <input
+                    type="checkbox"
+                    id="priceAlert"
+                >
 
-                    <i class="fas fa-dollar-sign"></i>
+                <span class="slider"></span>
 
-                    <span>Currency</span>
+            </label>
 
-                </div>
+        </div>
 
-                <select id="currency">
 
-                    <option>PKR</option>
+        <!-- Auto Refresh -->
 
-                    <option>USD</option>
+        <div class="setting-item">
 
-                    <option>AED</option>
+            <div>
 
-                    <option>SAR</option>
+                <i class="fas fa-rotate"></i>
 
-                </select>
+                <span>Auto Refresh</span>
 
             </div>
 
-        </section>
+            <label class="switch">
 
-        <!-- About -->
+                <input
+                    type="checkbox"
+                    id="autoRefresh"
+                    checked
+                >
 
-        <section class="card about-card">
+                <span class="slider"></span>
 
-            <h3>About App</h3>
+            </label>
 
-            <p>Mahi Gold Rate</p>
+        </div>
 
-            <p>Version 1.0</p>
 
-            <p>Developed by Muhammad Raza</p>
+        <!-- Currency -->
 
-        </section>
+        <div class="setting-item">
 
-        <!-- Logout -->
+            <div>
 
-        <button class="logout-btn">
+                <i class="fas fa-dollar-sign"></i>
 
-            Logout
+                <span>Currency</span>
+
+            </div>
+
+            <select id="currency">
+
+                <option value="PKR">
+                    PKR
+                </option>
+
+                <option value="USD">
+                    USD
+                </option>
+
+                <option value="AED">
+                    AED
+                </option>
+
+                <option value="SAR">
+                    SAR
+                </option>
+
+            </select>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================
+                PRICE ALERT SETUP
+    ========================================= -->
+
+    <section class="card alert-card">
+
+        <h3>
+
+            <i class="fas fa-bell"></i>
+
+            Gold Price Alert
+
+        </h3>
+
+
+        <p class="alert-description">
+
+            Set a target price and get notified when
+            gold reaches your target.
+
+        </p>
+
+
+        <div class="alert-form">
+
+            <!-- Gold Type -->
+
+            <label for="alertKarat">
+
+                Gold Type
+
+            </label>
+
+            <select id="alertKarat">
+
+                <option value="24">
+                    24K Gold
+                </option>
+
+                <option value="22">
+                    22K Gold
+                </option>
+
+                <option value="21">
+                    21K Gold
+                </option>
+
+                <option value="18">
+                    18K Gold
+                </option>
+
+            </select>
+
+
+            <!-- Target Price -->
+
+            <label for="alertPrice">
+
+                Target Price (PKR)
+
+            </label>
+
+            <input
+                type="number"
+                id="alertPrice"
+                placeholder="Example: 400000"
+                min="1"
+            >
+
+
+            <!-- Condition -->
+
+            <label for="alertCondition">
+
+                Alert When Price
+
+            </label>
+
+            <select id="alertCondition">
+
+                <option value="above">
+                    Goes Above
+                </option>
+
+                <option value="below">
+                    Goes Below
+                </option>
+
+            </select>
+
+
+            <!-- Save -->
+
+            <button
+                type="button"
+                id="saveAlertBtn"
+                class="save-alert-btn"
+            >
+
+                <i class="fas fa-bell"></i>
+
+                Set Price Alert
+
+            </button>
+
+        </div>
+
+
+        <!-- Status -->
+
+        <div
+            id="alertStatus"
+            class="alert-status"
+        ></div>
+
+    </section>
+
+
+    <!-- ========================================
+                    ACTIVE ALERT
+    ========================================= -->
+
+    <section class="card active-alert-card">
+
+        <div class="active-alert-header">
+
+            <div>
+
+                <h3>
+
+                    <i class="fas fa-bell"></i>
+
+                    Active Alert
+
+                </h3>
+
+                <p>
+
+                    Your current gold price alert
+
+                </p>
+
+            </div>
+
+            <span
+                id="alertBadge"
+                class="alert-badge"
+            >
+
+                OFF
+
+            </span>
+
+        </div>
+
+
+        <div class="alert-info">
+
+            <!-- Gold -->
+
+            <div class="alert-info-item">
+
+                <span>
+                    Gold
+                </span>
+
+                <strong id="activeAlertKarat">
+                    --
+                </strong>
+
+            </div>
+
+
+            <!-- Target -->
+
+            <div class="alert-info-item">
+
+                <span>
+                    Target Price
+                </span>
+
+                <strong id="activeAlertPrice">
+                    --
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- Delete -->
+
+        <button
+            type="button"
+            id="deleteAlertBtn"
+            class="delete-alert-btn"
+        >
+
+            <i class="fas fa-trash"></i>
+
+            Remove Alert
 
         </button>
 
-    </div>
+    </section>
 
-    <!-- Bottom Navigation -->
 
-    <nav class="bottom-nav">
+    <!-- ========================================
+                    ABOUT
+    ========================================= -->
 
-        <a href="mahi.html">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </a>
+    <section class="card about-card">
 
-        <a href="calculator.html">
-            <i class="fas fa-calculator"></i>
-            <span>Calculator</span>
-        </a>
+        <h3>
+            About App
+        </h3>
 
-        <a href="chart.html">
-            <i class="fas fa-chart-line"></i>
-            <span>Chart</span>
-        </a>
+        <p>
+            Mahi Gold Rate
+        </p>
 
-        <a href="setting.html" class="active">
-            <i class="fas fa-gear"></i>
-            <span>Settings</span>
-        </a>
+        <p>
+            Version 1.0
+        </p>
 
-    </nav>
+        <p>
+            Developed by Muhammad Raza
+        </p>
 
-    <script src="js/config.js"></script>
+    </section>
 
-    <script src="js/setting.js"></script>
+
+    <!-- ========================================
+                    LOGOUT
+    ========================================= -->
+
+    <button
+        class="logout-btn"
+        id="logoutBtn"
+    >
+
+        Logout
+
+    </button>
+
+</div>
+
+
+<!-- ========================================
+                BOTTOM NAVIGATION
+========================================= -->
+
+<nav class="bottom-nav">
+
+    <a href="mahi.html">
+
+        <i class="fas fa-home"></i>
+
+        <span>
+            Home
+        </span>
+
+    </a>
+
+
+    <a href="calculator.html">
+
+        <i class="fas fa-calculator"></i>
+
+        <span>
+            Calculator
+        </span>
+
+    </a>
+
+
+    <a
+        href="gold-rate-list.html"
+        class="active"
+    >
+
+        <i class="fa-solid fa-list"></i>
+
+        <span>Gold Rates</span>
+
+    </a>
+
+
+
+    <a href="chart.html">
+
+        <i class="fas fa-chart-line"></i>
+
+        <span>
+            Chart
+        </span>
+
+    </a>
+
+
+    <a
+        href="setting.html"
+        class="active"
+    >
+
+        <i class="fas fa-gear"></i>
+
+        <span>
+            Settings
+        </span>
+
+    </a>
+
+</nav>
+
+
+<!-- ========================================
+                JAVASCRIPT
+========================================= -->
+
+<script src="js/config.js"></script>
+
+<script src="js/api.js"></script>
+
+<script src="js/setting.js"></script>
 
 </body>
 

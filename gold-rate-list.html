@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gold Rate List | Mahi Gold Rate</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="gold-rate-list.css">
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <a href="mahi.html" class="back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </a>
+
+        <div class="header-title">
+
+            <h1>Live Gold Rate List</h1>
+
+            <p>Pakistan</p>
+
+        </div>
+
+        <button
+            id="refreshBtn"
+            class="refresh-btn"
+        >
+
+            <i class="fa-solid fa-rotate-right"></i>
+
+        </button>
+
+    </header>
+
+
+    <!-- NOTE -->
+
+    <section class="market-note">
+
+        <div class="note-icon">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+        </div>
+
+        <div>
+
+            <strong>
+                Live Gold Rate List in Pakistan
+            </strong>
+
+            <p>
+                Rates are calculated from live 24K
+                gold price and USD → PKR exchange rate.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- STATUS -->
+
+    <section class="status-card">
+
+        <div>
+
+            <span class="status-dot"></span>
+
+            <strong id="liveStatus">
+                LIVE
+            </strong>
+
+        </div>
+
+        <span id="lastUpdated">
+            Updating...
+        </span>
+
+    </section>
+
+
+    <!-- RATE LIST -->
+
+    <main id="rateList"></main>
+
+</div>
+
+
+<!-- BOTTOM NAVIGATION -->
+
+<nav class="bottom-nav">
+
+    <a href="mahi.html">
+
+        <i class="fa-solid fa-house"></i>
+
+        <span>Home</span>
+
+    </a>
+
+
+    <a href="calculator.html">
+
+        <i class="fa-solid fa-calculator"></i>
+
+        <span>Calculator</span>
+
+    </a>
+
+
+    <a href="chart.html">
+
+        <i class="fa-solid fa-chart-line"></i>
+
+        <span>Chart</span>
+
+    </a>
+
+
+    <a
+        href="gold-rate-list.html"
+        class="active"
+    >
+
+        <i class="fa-solid fa-list"></i>
+
+        <span>Gold Rates</span>
+
+    </a>
+
+
+    <a href="setting.html">
+
+        <i class="fa-solid fa-gear"></i>
+
+        <span>Settings</span>
+
+    </a>
+
+</nav>
+
+
+<!-- EXISTING PROJECT FILES -->
+
+<script src="js/config.js"></script>
+
+<script src="js/api.js"></script>
+
+<!-- GOLD RATE LIST -->
+
+<script src="gold-rate-list.js"></script>
+
+</body>
+
+</html>

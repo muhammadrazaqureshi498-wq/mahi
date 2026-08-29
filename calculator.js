@@ -1,132 +1,349 @@
 // ========================================
-// LOAD MAHI SETTINGS
+// MAHI GOLD RATE - LIVE GOLD CALCULATOR
 // ========================================
-
-const calculatorSettings =
-    JSON.parse(
-        localStorage.getItem("MAHI_SETTINGS")
-    ) || {
-
-        currency: "PKR",
-        autoRefresh: true,
-        darkMode: false,
-        priceAlert: false
-
-    };
-
-console.log("Calculator Settings:", calculatorSettings);
 
 
 // ========================================
-// MAHI GOLD RATE CALCULATOR
+// GET LIVE GOLD DATA
 // ========================================
 
-const savedGold = JSON.parse(localStorage.getItem("LIVE_GOLD"));
+function getLiveGold() {
 
-if (savedGold) {
-    LIVE_GOLD.gold24 = savedGold.gold24;
-    LIVE_GOLD.gold22 = savedGold.gold22;
-    LIVE_GOLD.gold21 = savedGold.gold21;
-    LIVE_GOLD.gold18 = savedGold.gold18;
-    LIVE_GOLD.usd = savedGold.usd;
-}
+    const savedGold = localStorage.getItem("LIVE_GOLD");
 
-console.log(LIVE_GOLD);
+    if (!savedGold) {
 
+        console.warn("LIVE_GOLD data not found");
 
-
-    console.log("LIVE_GOLD =", LIVE_GOLD);
-
-function getLiveRate(karat) {
-
-    switch (karat) {
-
-        case "24":
-            return LIVE_GOLD.gold24;
-
-        case "22":
-            return LIVE_GOLD.gold22;
-
-        case "21":
-            return LIVE_GOLD.gold21;
-
-        case "18":
-            return LIVE_GOLD.gold18;
-
-        default:
-            return 0;
+        return null;
     }
 
+    try {
+
+        return JSON.parse(savedGold);
+
+    } catch (error) {
+
+        console.error(
+            "LIVE_GOLD JSON Error:",
+            error
+        );
+
+        return null;
+    }
 }
+
+
+// ========================================
+// GET KARAT PRICE
+// ========================================
+
+function getKaratPrice(karat) {
+
+    const gold = getLiveGold();
+
+    if (!gold) {
+
+        return 0;
+    }
+
+    const price = Number(
+        gold[`gold${karat}`]
+    );
+
+    return price || 0;
+}
+
 
 // ========================================
 // DOM ELEMENTS
 // ========================================
 
-const goldType = document.getElementById("goldType");
-const weightUnit = document.getElementById("weightUnit");
-const weightInput = document.getElementById("weightInput");
-const calculateBtn = document.getElementById("calculateBtn");
-const totalPrice = document.getElementById("totalPrice");
+const goldType =
+    document.getElementById("goldType");
+
+const weightUnit =
+    document.getElementById("weightUnit");
+
+const weightInput =
+    document.getElementById("weightInput");
+
+const calculateBtn =
+    document.getElementById("calculateBtn");
+
+const totalPrice =
+    document.getElementById("totalPrice");
+
 
 // ========================================
-// CALCULATE PRICE
+// CHECK ELEMENTS
+// ========================================
+
+if (!goldType) {
+
+    console.error(
+        "goldType element not found"
+    );
+}
+
+if (!weightUnit) {
+
+    console.error(
+        "weightUnit element not found"
+    );
+}
+
+if (!weightInput) {
+
+    console.error(
+        "weightInput element not found"
+    );
+}
+
+if (!calculateBtn) {
+
+    console.error(
+        "calculateBtn element not found"
+    );
+}
+
+if (!totalPrice) {
+
+    console.error(
+        "totalPrice element not found"
+    );
+}
+
+
+// ========================================
+// CALCULATE GOLD PRICE
 // ========================================
 
 function calculateGoldPrice() {
 
-    console.log(LIVE_GOLD);
-    console.log("24K Rate:", LIVE_GOLD.gold24);
+    // Selected Karat
+    const karat =
+        goldType.value;
 
-    const karat = goldType.value;
-    const unit = weightUnit.value;
-    const weight = parseFloat(weightInput.value);
 
-    if (isNaN(weight) || weight <= 0) {
+    // Selected Unit
+    const unit =
+        weightUnit.value;
 
-        alert("Please enter a valid weight.");
+
+    // Entered Weight
+    const weight =
+        Number(weightInput.value);
+
+
+    // ========================================
+    // VALIDATE WEIGHT
+    // ========================================
+
+    if (!weight || weight <= 0) {
+
+        totalPrice.textContent =
+            "Enter Weight";
 
         return;
     }
 
-    // Per Tola Rate
-    const tolaRate = getLiveRate(karat);
 
-    let finalPrice = 0;
+    // ========================================
+    // GET LIVE KARAT PRICE
+    // ========================================
 
-    // Convert Weight
+    const pricePerTola =
+        getKaratPrice(karat);
+
+
+    // ========================================
+    // CHECK LIVE PRICE
+    // ========================================
+
+    if (!pricePerTola) {
+
+        totalPrice.textContent =
+            "Live Price Unavailable";
+
+        console.error(
+            "Live gold price unavailable"
+        );
+
+        return;
+    }
+
+
+    // ========================================
+    // PRICE CONVERSION
+    // ========================================
+
+    let price;
+
+
+    // ========================================
+    // TOLA
+    // ========================================
 
     if (unit === "tola") {
 
-        finalPrice = tolaRate * weight;
-
+        price =
+            pricePerTola * weight;
     }
+
+
+    // ========================================
+    // GRAM
+    // ========================================
 
     else if (unit === "gram") {
 
-        const gramRate = tolaRate / 11.664;
+        const pricePerGram =
+            pricePerTola / 11.664;
 
-        finalPrice = gramRate * weight;
-
+        price =
+            pricePerGram * weight;
     }
+
+
+    // ========================================
+    // TROY OUNCE
+    // ========================================
 
     else if (unit === "ounce") {
 
-        const ounceRate = (tolaRate / 11.664) * 31.1035;
+        const pricePerOunce =
+            pricePerTola *
+            31.1035 /
+            11.664;
 
-        finalPrice = ounceRate * weight;
-
+        price =
+            pricePerOunce * weight;
     }
 
-    // Show Result
 
-    totalPrice.innerHTML =
-        "Rs " + Math.round(finalPrice).toLocaleString();
+    // ========================================
+    // SHOW RESULT
+    // ========================================
+
+    totalPrice.textContent =
+        "Rs " +
+        Math.round(price).toLocaleString();
+
+
+    // ========================================
+    // CONSOLE
+    // ========================================
+
+    console.log(
+        "Gold Calculator:",
+        {
+            karat,
+            unit,
+            weight,
+            pricePerTola,
+            totalPrice: Math.round(price)
+        }
+    );
+}
+
+
+// ========================================
+// CALCULATE BUTTON
+// ========================================
+
+if (calculateBtn) {
+
+    calculateBtn.addEventListener(
+        "click",
+        calculateGoldPrice
+    );
 
 }
 
+
 // ========================================
-// BUTTON EVENT
+// ENTER KEY
 // ========================================
 
-calculateBtn.addEventListener("click", calculateGoldPrice);
+if (weightInput) {
+
+    weightInput.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Enter") {
+
+                calculateGoldPrice();
+
+            }
+
+        }
+    );
+
+}
+
+
+// ========================================
+// LOAD LIVE API PRICE
+// ========================================
+
+async function loadLiveGoldForCalculator() {
+
+    console.log(
+        "Calculator: Loading LIVE GOLD..."
+    );
+
+
+    // First check localStorage
+    const savedGold =
+        getLiveGold();
+
+
+    if (
+        savedGold &&
+        Number(savedGold.gold24) > 0
+    ) {
+
+        console.log(
+            "Calculator using saved LIVE_GOLD:",
+            savedGold
+        );
+
+        return;
+    }
+
+
+    // If no saved price, request API
+    if (
+        typeof getGoldPrice ===
+        "function"
+    ) {
+
+        console.log(
+            "Calculator requesting Gold API..."
+        );
+
+        await getGoldPrice();
+
+        console.log(
+            "Calculator LIVE_GOLD after API:",
+            getLiveGold()
+        );
+
+    } else {
+
+        console.error(
+            "getGoldPrice() not found"
+        );
+
+    }
+
+}
+
+
+// ========================================
+// FIRST LOAD
+// ========================================
+
+loadLiveGoldForCalculator();

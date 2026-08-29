@@ -54,6 +54,26 @@
 
         </header>
 
+        <!-- ========================================
+     MARKET NOTE
+======================================== -->
+
+<section class="market-note">
+
+    <div class="market-note-track">
+
+        <span>
+            ⚠️ نوٹ: یہ ریٹ صرف معلومات کے لیے ہیں، ان پر خرید و فروخت نہیں کی جائے۔
+        </span>
+
+        <span>
+            ⚠️ نوٹ: یہ ریٹ صرف معلومات کے لیے ہیں، ان پر خرید و فروخت نہیں کی جائے۔
+        </span>
+
+    </div>
+
+</section>
+
 
         <section class="update-bar">
 
@@ -78,6 +98,47 @@
             </div>
 
         </section>
+
+
+      <!-- ========================================
+     KARACHI LOCAL GOLD MARKET STATUS
+======================================== -->
+
+<section class="market-status-card">
+
+    <div class="market-status-header">
+
+        <div>
+            <span class="market-label">
+                KARACHI GOLD MARKET
+            </span>
+
+            <h2 id="marketStatus">
+                Checking...
+            </h2>
+        </div>
+
+        <div id="marketStatusIcon" class="market-status-icon">
+            <i class="fa-solid fa-clock"></i>
+        </div>
+
+    </div>
+
+    <p id="marketStatusMessage">
+        Checking Karachi market schedule...
+    </p>
+
+    <div class="market-countdown">
+
+        <i class="fa-solid fa-hourglass-half"></i>
+
+        <span id="marketCountdown">
+            --
+        </span>
+
+    </div>
+
+</section>
 
         <!-- ================= Main Title ================= -->
 
@@ -307,124 +368,140 @@
 
         </section>
 
-        <!-- ========================================
-     GOLD MARKET STATISTICS
-======================================== -->
+    <!-- ================= TRADINGVIEW ================= -->
 
-<section class="market-stats">
+    <section class="chart-section">
 
-    <div class="stats-header">
-        <div>
-            <h2>Market Statistics</h2>
-            <p>24K Gold Performance</p>
+        <div class="chart-header">
+
+            <div>
+
+                <h2>Gold Price</h2>
+
+                <p>International XAU/USD</p>
+
+            </div>
+
+            <i class="fa-solid fa-chart-line"></i>
+
         </div>
 
-        <span id="statsKarat">24K</span>
-    </div>
 
-        <div class="stats-karat-buttons">
+        <div class="tradingview-widget-container" >
 
-    <button class="stats-karat active" data-karat="24">
-        24K
-    </button>
+            <div
+                class="tradingview-widget-container__widget">
+            </div>
 
-    <button class="stats-karat" data-karat="22">
-        22K
-    </button>
+            <script
+                type="text/javascript"
+                src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"
+                async>
 
-    <button class="stats-karat" data-karat="21">
-        21K
-    </button>
+            {
+                "autosize": true,
+                "symbol": "OANDA:XAUUSD",
+                "interval": "60",
+                "timezone": "Asia/Karachi",
+                "theme": "dark",
+                "style": "3",
+                "locale": "en",
+                "allow_symbol_change": true,
+                "calendar": false,
+                "support_host": "https://www.tradingview.com"
+            }
 
-    <button class="stats-karat" data-karat="18">
-        18K
-    </button>
+            </script>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= MARKET INFO ================= -->
+
+    <section class="market-info">
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                <i class="fa-solid fa-globe"></i>
+            </div>
+
+            <div>
+
+                <span>Market</span>
+
+                <strong>XAU / USD</strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                <i class="fa-solid fa-clock"></i>
+            </div>
+
+            <div>
+
+                <span>Timezone</span>
+
+                <strong>Pakistan</strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+
+            <div>
+            <span>Source</span>
+            <strong>
+          <a href="https://www.tradingview.com" target="_blank" rel="noopener noreferrer" style="color: #ffd700; text-decoration: none;">TradingView</a>
+    </strong>
+            </div>
+
+        </div>
+
+    </section>
+
 
 </div>
 
+    <!-- ========================================
+     LIVE GOLD RATE LIST
+======================================== -->
 
-    <div class="stats-grid">
+<section class="gold-rate-list-section">
 
-        <!-- Current Price -->
-        <div class="stat-card">
+    <div class="list-title">
 
-            <div class="stat-icon">
-                <i class="fas fa-coins"></i>
-            </div>
+        <h2>
+            Live Gold Rate List
+        </h2>
 
-            <div>
-                <span>Current Price</span>
-
-                <strong id="statCurrent">
-                    Rs 0
-                </strong>
-            </div>
-
-        </div>
-
-
-        <!-- Today's High -->
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                <i class="fas fa-arrow-trend-up"></i>
-            </div>
-
-            <div>
-                <span>Today's High</span>
-
-                <strong id="statHigh">
-                    Rs 0
-                </strong>
-            </div>
-
-        </div>
-
-
-        <!-- Today's Low -->
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                <i class="fas fa-arrow-trend-down"></i>
-            </div>
-
-            <div>
-                <span>Today's Low</span>
-
-                <strong id="statLow">
-                    Rs 0
-                </strong>
-            </div>
-
-        </div>
-
-
-        <!-- Price Change -->
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                <i class="fas fa-chart-line"></i>
-            </div>
-
-            <div>
-                <span>Price Change</span>
-
-                <strong id="statChange">
-                    Rs 0
-                </strong>
-
-                <small id="statPercent">
-                    0.00%
-                </small>
-            </div>
-
-        </div>
+        <p>
+            Pakistan Gold Market
+        </p>
 
     </div>
+
+    <div id="dynamicGoldRateList"></div>
 
 </section>
 
-    </div>
+
+
+
+
 
     <!-- ===========================
  Bottom Navigation
@@ -449,6 +526,18 @@
 
     </a>
 
+        <a
+        href="gold-rate-list.html"
+        class="active"
+    >
+
+        <i class="fa-solid fa-list"></i>
+
+        <span>Gold Rates</span>
+
+    </a>
+
+
     <a href="chart.html" class="nav-item">
 
         <i class="fa-solid fa-chart-line"></i>
@@ -470,6 +559,8 @@
     <script src="js/config.js"></script>
     <script src="js/api.js"></script>
     <script src="js/app.js"></script>
+    <!-- <script src="calculator.js"></script> -->
+     <script src="gold-rate-list-home.js"></script>
     
     
 

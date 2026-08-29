@@ -1,159 +1,44 @@
 // ========================================
-// MAHI GOLD RATE - PRICE ALERT
+// MAHI GOLD RATE - SETTINGS
 // ========================================
-
-console.log("Setting JS Working!");
 
 
 // ========================================
-// ELEMENTS
+// DEFAULT SETTINGS
 // ========================================
 
-const saveAlert = document.getElementById("saveAlert");
-const alertKarat = document.getElementById("alertKarat");
-const targetPrice = document.getElementById("targetPrice");
-const alertCondition = document.getElementById("alertCondition");
+let APP_SETTINGS = {
 
+    darkMode: false,
 
-// Active Alert Elements
-const activeGold = document.getElementById("activeGold");
-const activeTarget = document.getElementById("activeTarget");
-const alertStatus = document.getElementById("alertStatus");
-const removeAlert = document.getElementById("removeAlert");
+    priceAlert: false,
 
+    autoRefresh: true,
 
-// ========================================
-// SAVE ALERT
-// ========================================
+    currency: "PKR"
 
-saveAlert.addEventListener("click", function () {
-
-    const karat = alertKarat.value;
-    const price = Number(targetPrice.value);
-    const condition = alertCondition.value;
-
-
-    // Check price
-    if (!price || price <= 0) {
-
-        alert("Please enter target price!");
-
-        return;
-    }
-
-
-    // Create alert
-    const alertData = {
-
-        karat: karat,
-
-        targetPrice: price,
-
-        condition: condition,
-
-        active: true
-
-    };
-
-
-    // Save in browser
-    localStorage.setItem(
-        "MAHI_PRICE_ALERT",
-        JSON.stringify(alertData)
-    );
-
-
-    console.log("ALERT SAVED:", alertData);
-
-
-    // Show result immediately
-    displayAlert(alertData);
-
-
-    alert("✅ Price Alert Set Successfully!");
-
-});
+};
 
 
 // ========================================
-// DISPLAY ALERT
+// LOAD SETTINGS
 // ========================================
 
-function displayAlert(alertData) {
-
-    if (!alertData) {
-        return;
-    }
+const savedSettings =
+    localStorage.getItem("MAHI_SETTINGS");
 
 
-    // Gold
-    if (activeGold) {
-
-        activeGold.textContent =
-            alertData.karat + "K Gold";
-
-    }
-
-
-    // Target
-    if (activeTarget) {
-
-        activeTarget.textContent =
-            "Rs " +
-            Number(alertData.targetPrice)
-                .toLocaleString("en-PK");
-
-    }
-
-
-    // Status
-    if (alertStatus) {
-
-        alertStatus.textContent = "ON";
-
-    }
-
-
-    console.log(
-        "Active Alert:",
-        alertData.karat + "K Gold",
-        alertData.targetPrice
-    );
-
-}
-
-
-// ========================================
-// LOAD SAVED ALERT
-// ========================================
-
-function loadAlert() {
-
-    const saved =
-        localStorage.getItem("MAHI_PRICE_ALERT");
-
-
-    if (!saved) {
-
-        console.log("No saved alert");
-
-        return;
-
-    }
-
+if (savedSettings) {
 
     try {
 
-        const alertData = JSON.parse(saved);
+        APP_SETTINGS =
+            JSON.parse(savedSettings);
 
-        displayAlert(alertData);
-
-    }
-
-    catch (error) {
+    } catch (error) {
 
         console.error(
-            "Alert Load Error:",
+            "Settings load error:",
             error
         );
 
@@ -162,160 +47,220 @@ function loadAlert() {
 }
 
 
-// ========================================
-// REMOVE ALERT
-// ========================================
-
-if (removeAlert) {
-
-    removeAlert.addEventListener(
-        "click",
-        function () {
-
-            localStorage.removeItem(
-                "MAHI_PRICE_ALERT"
-            );
-
-
-            if (activeGold) {
-                activeGold.textContent = "--";
-            }
-
-
-            if (activeTarget) {
-                activeTarget.textContent = "--";
-            }
-
-
-            if (alertStatus) {
-                alertStatus.textContent = "OFF";
-            }
-
-
-            alert("🗑 Alert Removed!");
-
-        }
-    );
-
-}
+console.log(
+    "APP SETTINGS:",
+    APP_SETTINGS
+);
 
 
 // ========================================
-// PAGE LOAD
+// DOM READY
 // ========================================
 
 document.addEventListener(
     "DOMContentLoaded",
     function () {
 
-        loadAlert();
+        initSettings();
+
+        initPriceAlert();
+
+        initLogout();
 
     }
 );
 
 
 // ========================================
-// CHECK LIVE GOLD PRICE
+// SAVE SETTINGS
 // ========================================
 
-function checkGoldPriceAlert() {
+function saveSettings() {
 
-    // Saved alert
-    const savedAlert =
-        localStorage.getItem("MAHI_PRICE_ALERT");
-
-    if (!savedAlert) {
-        return;
-    }
-
-    const alertData = JSON.parse(savedAlert);
-
-    // Alert already triggered
-    if (!alertData.active) {
-        return;
-    }
-
-
-    // LIVE_GOLD check
-    if (typeof LIVE_GOLD === "undefined") {
-
-        console.log("LIVE_GOLD not available.");
-
-        return;
-    }
-
-
-    // Get selected karat price
-    let currentPrice = 0;
-
-    switch (alertData.karat) {
-
-        case "24":
-            currentPrice = LIVE_GOLD.gold24;
-            break;
-
-        case "22":
-            currentPrice = LIVE_GOLD.gold22;
-            break;
-
-        case "21":
-            currentPrice = LIVE_GOLD.gold21;
-            break;
-
-        case "18":
-            currentPrice = LIVE_GOLD.gold18;
-            break;
-
-        default:
-            return;
-    }
-
-
-    console.log(
-        "Alert Check:",
-        alertData.karat + "K",
-        "Current:",
-        currentPrice,
-        "Target:",
-        alertData.targetPrice
+    localStorage.setItem(
+        "MAHI_SETTINGS",
+        JSON.stringify(APP_SETTINGS)
     );
 
+    console.log(
+        "Settings Saved:",
+        APP_SETTINGS
+    );
 
-    // No valid price
-    if (!currentPrice || currentPrice <= 0) {
-        return;
+}
+
+
+// ========================================
+// INITIALIZE SETTINGS
+// ========================================
+
+function initSettings() {
+
+    const darkMode =
+        document.getElementById(
+            "darkMode"
+        );
+
+    const priceAlert =
+        document.getElementById(
+            "priceAlert"
+        );
+
+    const autoRefresh =
+        document.getElementById(
+            "autoRefresh"
+        );
+
+    const currency =
+        document.getElementById(
+            "currency"
+        );
+
+
+    // ====================================
+    // SET CURRENT VALUES
+    // ====================================
+
+    if (darkMode) {
+
+        darkMode.checked =
+            APP_SETTINGS.darkMode;
+
     }
 
 
-    // ========================================
-    // ABOVE
-    // ========================================
+    if (priceAlert) {
 
-    if (
-        alertData.condition === "above" &&
-        currentPrice >= alertData.targetPrice
-    ) {
+        priceAlert.checked =
+            APP_SETTINGS.priceAlert;
 
-        triggerGoldAlert(
-            alertData,
-            currentPrice
+    }
+
+
+    if (autoRefresh) {
+
+        autoRefresh.checked =
+            APP_SETTINGS.autoRefresh;
+
+    }
+
+
+    if (currency) {
+
+        currency.value =
+            APP_SETTINGS.currency;
+
+    }
+
+
+    // ====================================
+    // DARK MODE
+    // ====================================
+
+    applyTheme();
+
+
+    // ====================================
+    // DARK MODE EVENT
+    // ====================================
+
+    if (darkMode) {
+
+        darkMode.addEventListener(
+            "change",
+            function () {
+
+                APP_SETTINGS.darkMode =
+                    this.checked;
+
+                applyTheme();
+
+                saveSettings();
+
+            }
         );
 
     }
 
 
-    // ========================================
-    // BELOW
-    // ========================================
+    // ====================================
+    // PRICE ALERT TOGGLE
+    // ====================================
 
-    if (
-        alertData.condition === "below" &&
-        currentPrice <= alertData.targetPrice
-    ) {
+    if (priceAlert) {
 
-        triggerGoldAlert(
-            alertData,
-            currentPrice
+        priceAlert.addEventListener(
+            "change",
+            function () {
+
+                APP_SETTINGS.priceAlert =
+                    this.checked;
+
+                saveSettings();
+
+                const alertData =
+                    getSavedAlert();
+
+                if (
+                    this.checked &&
+                    alertData
+                ) {
+
+                    showAlertStatus(
+                        "Price alerts enabled.",
+                        "success"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    // ====================================
+    // AUTO REFRESH
+    // ====================================
+
+    if (autoRefresh) {
+
+        autoRefresh.addEventListener(
+            "change",
+            function () {
+
+                APP_SETTINGS.autoRefresh =
+                    this.checked;
+
+                saveSettings();
+
+            }
+        );
+
+    }
+
+
+    // ====================================
+    // CURRENCY
+    // ====================================
+
+    if (currency) {
+
+        currency.addEventListener(
+            "change",
+            function () {
+
+                APP_SETTINGS.currency =
+                    this.value;
+
+                saveSettings();
+
+                console.log(
+                    "Currency:",
+                    this.value
+                );
+
+            }
         );
 
     }
@@ -324,294 +269,505 @@ function checkGoldPriceAlert() {
 
 
 // ========================================
-// TRIGGER ALERT
+// APPLY THEME
 // ========================================
 
-function triggerGoldAlert(alertData, currentPrice) {
+function applyTheme() {
 
-    console.log("🔔 GOLD PRICE TARGET HIT!");
+    if (
+        APP_SETTINGS.darkMode
+    ) {
+
+        document.body.classList.remove(
+            "light-mode"
+        );
+
+    } else {
+
+        document.body.classList.add(
+            "light-mode"
+        );
+
+    }
+
+}
 
 
-    alert(
-        "🔔 Gold Price Alert!\n\n" +
+// ========================================
+// PRICE ALERT
+// ========================================
 
-        alertData.karat + "K Gold\n" +
+function initPriceAlert() {
 
-        "Current Price: Rs " +
-        currentPrice.toLocaleString() +
+    const saveAlertBtn =
+        document.getElementById(
+            "saveAlertBtn"
+        );
 
-        "\nTarget Price: Rs " +
-        Number(alertData.targetPrice)
-            .toLocaleString()
-    );
+    const deleteAlertBtn =
+        document.getElementById(
+            "deleteAlertBtn"
+        );
 
 
-    // Mark alert as triggered
-    alertData.active = false;
+    // Load existing alert
 
-    alertData.triggered = true;
+    loadActiveAlert();
 
-    alertData.triggeredPrice = currentPrice;
 
-    alertData.triggeredAt =
-        new Date().toISOString();
+    // Save alert
 
+    if (saveAlertBtn) {
+
+        saveAlertBtn.addEventListener(
+            "click",
+            savePriceAlert
+        );
+
+    }
+
+
+    // Delete alert
+
+    if (deleteAlertBtn) {
+
+        deleteAlertBtn.addEventListener(
+            "click",
+            deletePriceAlert
+        );
+
+    }
+
+}
+
+
+// ========================================
+// SAVE PRICE ALERT
+// ========================================
+
+function savePriceAlert() {
+
+    const karat =
+        document.getElementById(
+            "alertKarat"
+        ).value;
+
+
+    const priceInput =
+        document.getElementById(
+            "alertPrice"
+        );
+
+
+    const condition =
+        document.getElementById(
+            "alertCondition"
+        ).value;
+
+
+    const price =
+        Number(priceInput.value);
+
+
+    // ====================================
+    // VALIDATION
+    // ====================================
+
+    if (!price || price <= 0) {
+
+        showAlertStatus(
+            "Please enter a valid target price.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    // ====================================
+    // ALERT DATA
+    // ====================================
+
+    const alertData = {
+
+        enabled: true,
+
+        karat: karat,
+
+        price: price,
+
+        condition: condition,
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+    // ====================================
+    // SAVE
+    // ====================================
 
     localStorage.setItem(
         "MAHI_PRICE_ALERT",
         JSON.stringify(alertData)
     );
 
-}
 
+    // Enable price alert setting
 
-// ========================================
-// CHECK EVERY 5 SECONDS
-// ========================================
+    APP_SETTINGS.priceAlert = true;
 
-setInterval(
-    checkGoldPriceAlert,
-    5000
-);
-
-
-// Initial check
-checkGoldPriceAlert();
-
-
-function checkGoldPriceAlert() {
-
-    const savedAlert =
-        localStorage.getItem("MAHI_PRICE_ALERT");
-
-    if (!savedAlert) {
-        return;
-    }
-
-    const alertData = JSON.parse(savedAlert);
-
-    if (!alertData.active) {
-        return;
-    }
-
-    let currentPrice = 0;
-
-    switch (alertData.karat) {
-
-        case "24":
-            currentPrice = LIVE_GOLD.gold24;
-            break;
-
-        case "22":
-            currentPrice = LIVE_GOLD.gold22;
-            break;
-
-        case "21":
-            currentPrice = LIVE_GOLD.gold21;
-            break;
-
-        case "18":
-            currentPrice = LIVE_GOLD.gold18;
-            break;
-    }
-
-    console.log("Current Gold Price:", currentPrice);
-    console.log("Target Price:", alertData.targetPrice);
-
-    if (
-        alertData.condition === "above" &&
-        currentPrice >= alertData.targetPrice
-    ) {
-
-        alert(
-            "🔔 " +
-            alertData.karat +
-            "K Gold target reached!"
+    const priceAlert =
+        document.getElementById(
+            "priceAlert"
         );
 
-        alertData.active = false;
+    if (priceAlert) {
 
-        localStorage.setItem(
-            "MAHI_PRICE_ALERT",
-            JSON.stringify(alertData)
-        );
-    }
-
-
-    if (
-        alertData.condition === "below" &&
-        currentPrice <= alertData.targetPrice
-    ) {
-
-        alert(
-            "🔔 " +
-            alertData.karat +
-            "K Gold target reached!"
-        );
-
-        alertData.active = false;
-
-        localStorage.setItem(
-            "MAHI_PRICE_ALERT",
-            JSON.stringify(alertData)
-        );
-    }
-}
-
-
-// Check every 5 seconds
-
-setInterval(
-    checkGoldPriceAlert,
-    5000
-);
-
-
-
-// ========================================
-// GOLD ALERT NOTIFICATION
-// ========================================
-
-function showGoldNotification(message) {
-
-    if ("Notification" in window) {
-
-        if (Notification.permission === "granted") {
-
-            new Notification("Mahi Gold Rate 🔔", {
-                body: message
-            });
-
-        }
-
-        else if (Notification.permission !== "denied") {
-
-            Notification.requestPermission().then(permission => {
-
-                if (permission === "granted") {
-
-                    new Notification("Mahi Gold Rate 🔔", {
-                        body: message
-                    });
-
-                }
-
-            });
-
-        }
-
-    }
-
-}
-
-
-// ========================================
-// UPDATED ALERT CHECK
-// ========================================
-
-function checkLiveGoldAlert() {
-
-    const savedAlert =
-        localStorage.getItem("MAHI_PRICE_ALERT");
-
-    if (!savedAlert) return;
-
-
-    const alertData =
-        JSON.parse(savedAlert);
-
-    if (!alertData.active) return;
-
-
-    let currentPrice = 0;
-
-
-    if (alertData.karat === "24") {
-        currentPrice = LIVE_GOLD.gold24;
-    }
-
-    if (alertData.karat === "22") {
-        currentPrice = LIVE_GOLD.gold22;
-    }
-
-    if (alertData.karat === "21") {
-        currentPrice = LIVE_GOLD.gold21;
-    }
-
-    if (alertData.karat === "18") {
-        currentPrice = LIVE_GOLD.gold18;
-    }
-
-
-    if (!currentPrice || currentPrice <= 0) {
-
-        console.log("LIVE_GOLD price unavailable");
-
-        return;
+        priceAlert.checked = true;
 
     }
 
 
-    console.log(
-        `${alertData.karat}K Current:`,
-        currentPrice
+    saveSettings();
+
+
+    // ====================================
+    // UPDATE UI
+    // ====================================
+
+    loadActiveAlert();
+
+
+    showAlertStatus(
+        "Price alert successfully set!",
+        "success"
     );
 
 
-    let targetReached = false;
+    console.log(
+        "Price Alert:",
+        alertData
+    );
+
+}
 
 
-    // ABOVE
-    if (
-        alertData.condition === "above" &&
-        currentPrice >= alertData.targetPrice
-    ) {
+// ========================================
+// GET SAVED ALERT
+// ========================================
 
-        targetReached = true;
+function getSavedAlert() {
 
-    }
-
-
-    // BELOW
-    if (
-        alertData.condition === "below" &&
-        currentPrice <= alertData.targetPrice
-    ) {
-
-        targetReached = true;
-
-    }
-
-
-    if (targetReached) {
-
-        const message =
-            `${alertData.karat}K Gold reached Rs ${currentPrice.toLocaleString()}`;
-
-
-        console.log("🔔 ALERT:", message);
-
-
-        showGoldNotification(message);
-
-
-        alertData.active = false;
-
-        alertData.triggered = true;
-
-        localStorage.setItem(
-            "MAHI_PRICE_ALERT",
-            JSON.stringify(alertData)
+    const savedAlert =
+        localStorage.getItem(
+            "MAHI_PRICE_ALERT"
         );
+
+
+    if (!savedAlert) {
+
+        return null;
+
+    }
+
+
+    try {
+
+        return JSON.parse(
+            savedAlert
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Alert data error:",
+            error
+        );
+
+        return null;
 
     }
 
 }
 
 
-// Check every 5 seconds
+// ========================================
+// LOAD ACTIVE ALERT
+// ========================================
 
-setInterval(
-    checkLiveGoldAlert,
-    5000
-);
+function loadActiveAlert() {
+
+    const alertData =
+        getSavedAlert();
+
+
+    const badge =
+        document.getElementById(
+            "alertBadge"
+        );
+
+
+    const activeKarat =
+        document.getElementById(
+            "activeAlertKarat"
+        );
+
+
+    const activePrice =
+        document.getElementById(
+            "activeAlertPrice"
+        );
+
+
+    if (!alertData) {
+
+        if (badge) {
+
+            badge.textContent = "OFF";
+
+            badge.classList.remove(
+                "active"
+            );
+
+        }
+
+
+        if (activeKarat) {
+
+            activeKarat.textContent =
+                "--";
+
+        }
+
+
+        if (activePrice) {
+
+            activePrice.textContent =
+                "--";
+
+        }
+
+
+        return;
+
+    }
+
+
+    // ====================================
+    // BADGE
+    // ====================================
+
+    if (badge) {
+
+        badge.textContent = "ON";
+
+        badge.classList.add(
+            "active"
+        );
+
+    }
+
+
+    // ====================================
+    // KARAT
+    // ====================================
+
+    if (activeKarat) {
+
+        activeKarat.textContent =
+            alertData.karat + "K Gold";
+
+    }
+
+
+    // ====================================
+    // PRICE
+    // ====================================
+
+    if (activePrice) {
+
+        activePrice.textContent =
+            "Rs " +
+            Number(
+                alertData.price
+            ).toLocaleString();
+
+    }
+
+}
+
+
+// ========================================
+// DELETE ALERT
+// ========================================
+
+function deletePriceAlert() {
+
+    localStorage.removeItem(
+        "MAHI_PRICE_ALERT"
+    );
+
+
+    APP_SETTINGS.priceAlert =
+        false;
+
+
+    const priceAlert =
+        document.getElementById(
+            "priceAlert"
+        );
+
+
+    if (priceAlert) {
+
+        priceAlert.checked = false;
+
+    }
+
+
+    saveSettings();
+
+
+    loadActiveAlert();
+
+
+    showAlertStatus(
+        "Price alert removed.",
+        "success"
+    );
+
+
+    console.log(
+        "Price Alert Removed"
+    );
+
+}
+
+
+// ========================================
+// ALERT STATUS MESSAGE
+// ========================================
+
+function showAlertStatus(
+    message,
+    type
+) {
+
+    const status =
+        document.getElementById(
+            "alertStatus"
+        );
+
+
+    if (!status) {
+
+        return;
+
+    }
+
+
+    status.textContent =
+        message;
+
+
+    status.classList.add(
+        "show"
+    );
+
+
+    // ====================================
+    // SUCCESS
+    // ====================================
+
+    if (type === "success") {
+
+        status.style.color =
+            "#22c55e";
+
+    }
+
+
+    // ====================================
+    // ERROR
+    // ====================================
+
+    else if (type === "error") {
+
+        status.style.color =
+            "#ef4444";
+
+    }
+
+
+    // ====================================
+    // HIDE AFTER 3 SEC
+    // ====================================
+
+    setTimeout(
+        function () {
+
+            status.classList.remove(
+                "show"
+            );
+
+        },
+        3000
+    );
+
+}
+
+
+// ========================================
+// LOGOUT
+// ========================================
+
+function initLogout() {
+
+    const logoutBtn =
+        document.getElementById(
+            "logoutBtn"
+        );
+
+
+    if (!logoutBtn) {
+
+        return;
+
+    }
+
+
+    logoutBtn.addEventListener(
+        "click",
+        function () {
+
+            const confirmLogout =
+                confirm(
+                    "Are you sure you want to logout?"
+                );
+
+
+            if (!confirmLogout) {
+
+                return;
+
+            }
+
+
+            console.log(
+                "Logout clicked"
+            );
+
+
+            // For now simply show message
+
+            alert(
+                "Logout feature will be connected later."
+            );
+
+        }
+    );
+
+}

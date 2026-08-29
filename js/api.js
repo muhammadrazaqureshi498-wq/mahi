@@ -1,5 +1,8 @@
+// New
+
 // ========================================
 // MAHI GOLD RATE - API
+// XAUS API
 // ========================================
 
 
@@ -11,18 +14,13 @@ async function getGoldPrice() {
 
     try {
 
-        const url =
-            `${CONFIG.GOLD_API_URL}?api_key=${CONFIG.GOLD_API_KEY}&base=USD&currencies=XAU,PKR`;
+        console.log("Requesting XAUS Gold API...");
 
-        console.log("Requesting Gold API...");
 
-        const response = await fetch(url, {
+        const response = await fetch(
+            CONFIG.GOLD_API_URL
+        );
 
-            headers: {
-                "Accept": "application/json"
-            }
-
-        });
 
         if (!response.ok) {
 
@@ -32,40 +30,34 @@ async function getGoldPrice() {
 
         }
 
+
         const data = await response.json();
 
-        console.log("Gold API Response:", data);
 
         console.log(
-            JSON.stringify(data, null, 2)
+            "XAUS API Response:",
+            data
         );
 
 
         // ========================================
-        // API ERROR
+        // GET GOLD PRICE
         // ========================================
 
-        if (!data.success) {
-
-            console.warn(
-                "API Error:",
-                data.error
-            );
-
-            return null;
-
-        }
+     const goldPrice =
+    Number(
+        data.spot_usd_oz
+    );
 
 
         // ========================================
-        // GET API VALUES
+        // GET USD → PKR
         // ========================================
-
-        const goldPrice =
-            Number(data.rates.USDXAU);
 
         const usdToPkr =
-            Number(data.rates.PKR);
+    Number(
+        data.fx_rates.PKR
+    );
 
 
         console.log(
@@ -73,17 +65,21 @@ async function getGoldPrice() {
             goldPrice
         );
 
+
         console.log(
-            "USD to PKR:",
+            "USD → PKR:",
             usdToPkr
         );
 
 
         // ========================================
-        // CHECK VALUES
+        // CHECK DATA
         // ========================================
 
-        if (!goldPrice || !usdToPkr) {
+        if (
+            !goldPrice ||
+            !usdToPkr
+        ) {
 
             console.error(
                 "Gold price or USD/PKR missing"
@@ -98,49 +94,68 @@ async function getGoldPrice() {
         // 24K GOLD - 1 TOLA
         // ========================================
 
-        LIVE_GOLD.gold24 =
-            Math.round(
-                (
-                    goldPrice *
-                    usdToPkr /
-                    31.1035
-                ) * 11.664
-            );
+        const gram24 =
+            (
+                goldPrice *
+                usdToPkr
+            ) / 31.1034768;
+
+
+        const tola24 =
+            gram24 * 11.6638125;
+
+
+        const price24 =
+            Math.round(tola24);
 
 
         // ========================================
         // OTHER KARATS
         // ========================================
 
-        LIVE_GOLD.gold22 =
+        const price22 =
             Math.round(
-                LIVE_GOLD.gold24 * 22 / 24
+                price24 * 22 / 24
             );
+
+
+        const price21 =
+            Math.round(
+                price24 * 21 / 24
+            );
+
+
+        const price18 =
+            Math.round(
+                price24 * 18 / 24
+            );
+
+
+        // ========================================
+        // SAVE LIVE GOLD DATA
+        // ========================================
+
+        LIVE_GOLD.gold24 =
+            price24;
+
+        LIVE_GOLD.gold22 =
+            price22;
 
         LIVE_GOLD.gold21 =
-            Math.round(
-                LIVE_GOLD.gold24 * 21 / 24
-            );
+            price21;
 
         LIVE_GOLD.gold18 =
-            Math.round(
-                LIVE_GOLD.gold24 * 18 / 24
-            );
-
-
-        // ========================================
-        // INTERNATIONAL + USD
-        // ========================================
-
-        LIVE_GOLD.international =
-            goldPrice;
+            price18;
 
         LIVE_GOLD.usd =
             usdToPkr;
 
+        LIVE_GOLD.international =
+            goldPrice;
+
 
         // ========================================
-        // SAVE
+        // LOCAL STORAGE
         // ========================================
 
         localStorage.setItem(
@@ -155,12 +170,45 @@ async function getGoldPrice() {
         );
 
 
+
         // ========================================
-        // UPDATE HOME
+// SAVE CHART HISTORY
+// ========================================
+
+const chartHistory =
+    JSON.parse(
+        localStorage.getItem("MAHI_CHART_HISTORY")
+    ) || [];
+
+chartHistory.push({
+    time: new Date().toISOString(),
+
+    gold24: LIVE_GOLD.gold24,
+    gold22: LIVE_GOLD.gold22,
+    gold21: LIVE_GOLD.gold21,
+    gold18: LIVE_GOLD.gold18
+});
+
+// Last 100 prices only
+if (chartHistory.length > 100) {
+    chartHistory.shift();
+}
+
+localStorage.setItem(
+    "MAHI_CHART_HISTORY",
+    JSON.stringify(chartHistory)
+);
+
+console.log("Chart History Saved:", chartHistory);
+
+
+        // ========================================
+        // UPDATE HOME PAGE
         // ========================================
 
         if (
-            typeof updateGoldCards === "function"
+            typeof updateGoldCards ===
+            "function"
         ) {
 
             updateGoldCards({
@@ -172,6 +220,19 @@ async function getGoldPrice() {
             });
 
         }
+
+        // ========================================
+// UPDATE MARKET STATISTICS
+// ========================================
+
+if (
+    typeof updateMarketStats ===
+    "function"
+) {
+
+    updateMarketStats();
+
+}
 
 
         return data;

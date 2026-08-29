@@ -144,7 +144,6 @@ getGoldPrice();
 
 updateLastUpdated();
 
-updateMarketStats();
 
 // ========================================
 // AUTO REFRESH
@@ -346,50 +345,746 @@ function updateMarketStats() {
 
 }
 
+
+
 // ========================================
 // STATISTICS KARAT BUTTONS
 // ========================================
 
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const buttons =
+            document.querySelectorAll(
+                ".stats-karat"
+            );
+
+
+        console.log(
+            "Karat buttons:",
+            buttons.length
+        );
+
+
+        buttons.forEach(
+            function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+
+                        // ========================================
+                        // REMOVE ACTIVE
+                        // ========================================
+
+                        buttons.forEach(
+                            function (btn) {
+
+                                btn.classList.remove(
+                                    "active"
+                                );
+
+                            }
+                        );
+
+
+                        // ========================================
+                        // ADD ACTIVE
+                        // ========================================
+
+                        this.classList.add(
+                            "active"
+                        );
+
+
+                        // ========================================
+                        // GET KARAT
+                        // ========================================
+
+                        const karat =
+                            this.dataset.karat;
+
+
+                        selectedStatsKarat =
+                            karat;
+
+
+                        console.log(
+                            "Selected:",
+                            karat + "K"
+                        );
+
+
+                        // ========================================
+                        // UPDATE TITLE
+                        // ========================================
+
+                        const statsKarat =
+                            document.getElementById(
+                                "statsKarat"
+                            );
+
+
+                        if (statsKarat) {
+
+                            statsKarat.textContent =
+                                karat + "K";
+
+                        }
+
+
+                        // ========================================
+                        // UPDATE STATISTICS
+                        // ========================================
+
+                        updateMarketStats(
+                            karat
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    }
+);
+
+
+
+
+// ========================================
+// HYDERABAD GOLD MARKET STATUS (2 PM OPEN, FRIDAY OFF)
+// ========================================
+
+function updateHyderabadMarketStatus() {
+
+    const status = document.getElementById("marketStatus");
+    const message = document.getElementById("marketStatusMessage");
+    const countdown = document.getElementById("marketCountdown");
+    const icon = document.getElementById("marketStatusIcon");
+
+    if (!status || !message || !countdown || !icon) {
+        return;
+    }
+
+    const now = new Date();
+
+    // Hyderabad / Pakistan time
+    const hyderabadTime = new Date(
+        now.toLocaleString("en-US", {
+            timeZone: "Asia/Karachi"
+        })
+    );
+
+    const day = hyderabadTime.getDay(); // 0 = Sunday, 5 = Friday
+    const hour = hyderabadTime.getHours();
+    const minute = hyderabadTime.getMinutes();
+
+    const currentMinutes = hour * 60 + minute;
+
+    // ========================================
+    // HYDERABAD MARKET TIMING
+    // 2:00 PM (14:00) - 8:00 PM (20:00)
+    // Friday CLOSED
+    // ========================================
+
+    const openingMinutes = 14 * 60; // 2:00 PM
+    const closingMinutes = 20 * 60; // 8:00 PM
+
+    // ========================================
+    // FRIDAY (OFF DAY)
+    // ========================================
+
+    if (day === 5) {
+
+        status.textContent = "LOCAL MARKET CLOSED";
+
+        message.textContent =
+            "Hyderabad gold market is closed today (Friday).";
+
+        countdown.textContent =
+            "Opens Saturday at 2:00 PM";
+
+        icon.innerHTML =
+            '<i class="fa-solid fa-lock"></i>';
+
+        icon.className =
+            "market-status-icon closed";
+
+        return;
+    }
+
+    // ========================================
+    // BEFORE OPENING (BEFORE 2:00 PM)
+    // ========================================
+
+    if (currentMinutes < openingMinutes) {
+
+        status.textContent = "MARKET CLOSED";
+
+        message.textContent =
+            "Hyderabad gold market opens at 2:00 PM.";
+
+        countdown.textContent =
+            getTimeUntilHyderabad(
+                hyderabadTime,
+                14,
+                0
+            );
+
+        icon.innerHTML =
+            '<i class="fa-solid fa-clock"></i>';
+
+        icon.className =
+            "market-status-icon closed";
+
+        return;
+    }
+
+    // ========================================
+    // AFTER CLOSING (AFTER 8:00 PM)
+    // ========================================
+
+    if (currentMinutes >= closingMinutes) {
+
+        status.textContent = "LOCAL MARKET CLOSED";
+
+        message.textContent =
+            "Today's Hyderabad gold market session has ended.";
+
+        if (day === 4) { // Thursday night
+            countdown.textContent = "Opens Saturday at 2:00 PM";
+        } else {
+            countdown.textContent = "Opens tomorrow at 2:00 PM";
+        }
+
+        icon.innerHTML =
+            '<i class="fa-solid fa-lock"></i>';
+
+        icon.className =
+            "market-status-icon closed";
+
+        return;
+    }
+
+    // ========================================
+    // MARKET OPEN (2:00 PM - 8:00 PM)
+    // ========================================
+
+    status.textContent = "LOCAL MARKET OPEN";
+
+    message.textContent =
+        "Hyderabad gold market is currently active.";
+
+    countdown.textContent =
+        getRemainingMarketTime(
+            hyderabadTime
+        );
+
+    icon.innerHTML =
+        '<i class="fa-solid fa-circle-check"></i>';
+
+    icon.className =
+        "market-status-icon open";
+}
+
+
+// ========================================
+// TIME UNTIL OPEN
+// ========================================
+
+function getTimeUntilHyderabad(
+    currentTime,
+    targetHour,
+    targetMinute
+) {
+
+    const target = new Date(currentTime);
+
+    target.setHours(
+        targetHour,
+        targetMinute,
+        0,
+        0
+    );
+
+    let difference =
+        target.getTime() -
+        currentTime.getTime();
+
+    if (difference < 0) {
+        difference += 24 * 60 * 60 * 1000;
+    }
+
+    return formatTimeDifference(difference);
+}
+
+
+// ========================================
+// REMAINING MARKET TIME
+// ========================================
+
+function getRemainingMarketTime(currentTime) {
+
+    const closing = new Date(currentTime);
+
+    closing.setHours(
+        20,
+        0,
+        0,
+        0
+    );
+
+    const difference =
+        closing.getTime() -
+        currentTime.getTime();
+
+    return formatTimeDifference(difference) + " remaining";
+}
+
+
+// ========================================
+// FORMAT TIME
+// ========================================
+
+function formatTimeDifference(milliseconds) {
+
+    const totalMinutes =
+        Math.max(
+            0,
+            Math.floor(
+                milliseconds / 60000
+            )
+        );
+
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+
+    if (hours > 0) {
+        return hours + "h " + minutes + "m";
+    }
+
+    return minutes + "m";
+}
+
+
+// ========================================
+// START MARKET STATUS
+// ========================================
+
+updateHyderabadMarketStatus();
+
+setInterval(
+    updateHyderabadMarketStatus,
+    30000
+);
+
+
+
+// ========================================
+// MAHI GOLD RATE
+// DYNAMIC GOLD RATE LIST
+// ========================================
+
 document.addEventListener("DOMContentLoaded", function () {
 
-    const buttons = document.querySelectorAll(".stats-karat");
+    const container =
+        document.getElementById("dynamicGoldRateList");
 
-    console.log("Karat buttons:", buttons.length);
+    if (!container) {
 
+        console.error(
+            "dynamicGoldRateList element not found"
+        );
 
-    buttons.forEach(function (button) {
-
-        button.addEventListener("click", function () {
-
-            // Remove active from all
-            buttons.forEach(function (btn) {
-                btn.classList.remove("active");
-            });
+        return;
+    }
 
 
-            // Add active to clicked button
-            this.classList.add("active");
+    // ========================================
+    // GOLD KARATS
+    // ========================================
+
+    const karats = [24, 22, 21, 20, 18];
 
 
-            // Get selected karat
-            const karat = this.dataset.karat;
+    // ========================================
+    // 1 TOLA = 11.664 GRAMS
+    // ========================================
 
-            console.log("Selected:", karat + "K");
+    const TOLA_GRAMS = 11.664;
 
 
-            // Update heading
-            const statsKarat =
-                document.getElementById("statsKarat");
+    // ========================================
+    // FORMAT PRICE
+    // ========================================
 
-            if (statsKarat) {
+    function formatPrice(price) {
 
-                statsKarat.textContent =
-                    karat + "K";
+        return "Rs " +
+            Math.round(Number(price || 0))
+                .toLocaleString("en-PK");
+
+    }
+
+
+    // ========================================
+    // GET LIVE GOLD DATA
+    // ========================================
+
+    function getLiveGoldData() {
+
+        // First try global LIVE_GOLD
+
+        if (
+            typeof LIVE_GOLD !== "undefined" &&
+            LIVE_GOLD.gold24 > 0
+        ) {
+
+            return LIVE_GOLD;
+
+        }
+
+
+        // Backup: localStorage
+
+        try {
+
+            const saved =
+                localStorage.getItem("LIVE_GOLD");
+
+            if (saved) {
+
+                return JSON.parse(saved);
 
             }
 
+        } catch (error) {
+
+            console.error(
+                "LIVE_GOLD localStorage error:",
+                error
+            );
+
+        }
+
+
+        return null;
+
+    }
+
+
+    // ========================================
+    // GET KARAT PRICE
+    // ========================================
+
+    function getKaratPrice(gold, karat) {
+
+        switch (karat) {
+
+            case 24:
+                return Number(gold.gold24 || 0);
+
+            case 22:
+                return Number(gold.gold22 || 0);
+
+            case 21:
+                return Number(gold.gold21 || 0);
+
+            case 20:
+
+                // Calculate 20K from 24K
+
+                return Number(gold.gold24 || 0)
+                    * 20 / 24;
+
+            case 18:
+                return Number(gold.gold18 || 0);
+
+            default:
+                return 0;
+
+        }
+
+    }
+
+
+    // ========================================
+    // CREATE RATE SECTION
+    // ========================================
+
+    function createRateSection(
+        title,
+        subtitle,
+        weightInGrams,
+        gold
+    ) {
+
+        const section =
+            document.createElement("section");
+
+        section.className = "home-rate-section";
+
+
+        // ========================================
+        // HEADER
+        // ========================================
+
+        const header =
+            document.createElement("div");
+
+        header.className =
+            "home-rate-section-header";
+
+
+        header.innerHTML = `
+
+            <div>
+
+                <h3>
+                    ${title}
+                </h3>
+
+                <p>
+                    ${subtitle}
+                </p>
+
+            </div>
+
+        `;
+
+
+        section.appendChild(header);
+
+
+        // ========================================
+        // TABLE HEADER
+        // ========================================
+
+        const tableHeader =
+            document.createElement("div");
+
+        tableHeader.className =
+            "home-rate-table-header";
+
+
+        tableHeader.innerHTML = `
+
+            <span>
+                Gold Weight
+            </span>
+
+            <span>
+                Gold Karat
+            </span>
+
+            <span>
+                Gold Rate
+            </span>
+
+        `;
+
+
+        section.appendChild(tableHeader);
+
+
+        // ========================================
+        // KARAT ROWS
+        // ========================================
+
+        karats.forEach(function (karat) {
+
+            const tolaPrice =
+                getKaratPrice(gold, karat);
+
+
+            const gramPrice =
+                tolaPrice / TOLA_GRAMS;
+
+
+            const finalPrice =
+                gramPrice * weightInGrams;
+
+
+            const row =
+                document.createElement("div");
+
+            row.className = "home-rate-row";
+
+
+            row.innerHTML = `
+
+                <span>
+                    ${weightInGrams === TOLA_GRAMS
+                        ? "Per Tola"
+                        : weightInGrams + " Gram"}
+                </span>
+
+                <span>
+                    ${karat}K
+                </span>
+
+                <strong>
+                    <small>PKR</small>
+                    ${Math.round(finalPrice)
+                        .toLocaleString("en-PK")}
+                </strong>
+
+            `;
+
+
+            section.appendChild(row);
+
         });
 
-    });
+
+        return section;
+
+    }
+
+
+    // ========================================
+    // UPDATE LIST
+    // ========================================
+
+    function updateGoldRateList() {
+
+        const gold =
+            getLiveGoldData();
+
+
+        if (!gold) {
+
+            console.log(
+                "Waiting for LIVE_GOLD..."
+            );
+
+            return;
+
+        }
+
+
+        if (
+            !gold.gold24 ||
+            Number(gold.gold24) <= 0
+        ) {
+
+            console.log(
+                "Gold price not available yet..."
+            );
+
+            return;
+
+        }
+
+
+        // Clear old list
+
+        container.innerHTML = "";
+
+
+        // ========================================
+        // 1 TOLA
+        // ========================================
+
+        container.appendChild(
+
+            createRateSection(
+
+                "Per Tola",
+
+                "1 Tola = 11.664 grams",
+
+                TOLA_GRAMS,
+
+                gold
+
+            )
+
+        );
+
+
+        // ========================================
+        // 10 GRAM → 1 GRAM
+        // ========================================
+
+        for (
+            let grams = 10;
+            grams >= 1;
+            grams--
+        ) {
+
+            container.appendChild(
+
+                createRateSection(
+
+                    grams + " Gram",
+
+                    grams + " gram gold rate",
+
+                    grams,
+
+                    gold
+
+                )
+
+            );
+
+        }
+
+
+        console.log(
+            "Dynamic Gold Rate List Updated"
+        );
+
+    }
+
+
+    // ========================================
+    // FIRST LOAD
+    // ========================================
+
+    updateGoldRateList();
+
+
+    // ========================================
+    // WAIT FOR LIVE API
+    // ========================================
+
+    const waitingInterval =
+        setInterval(function () {
+
+            updateGoldRateList();
+
+            const gold =
+                getLiveGoldData();
+
+            if (
+                gold &&
+                Number(gold.gold24) > 0
+            ) {
+
+                clearInterval(
+                    waitingInterval
+                );
+
+            }
+
+        }, 2000);
+
+
+    // ========================================
+    // AUTO UPDATE
+    // ========================================
+
+    setInterval(function () {
+
+        updateGoldRateList();
+
+    }, 60000);
 
 });
