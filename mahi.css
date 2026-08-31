@@ -337,7 +337,7 @@ body {
 
 
 /* =========================
-BOTTOM NAV
+   BOTTOM NAV
 ========================= */
 
 .bottom-nav {
@@ -352,7 +352,7 @@ BOTTOM NAV
 
     transform: translateX(-50%);
 
-    width: min(900px, 100%);
+    width: min(900px, calc(100% - 40px));
 
     min-height: 72px;
 
@@ -364,7 +364,8 @@ BOTTOM NAV
 
     grid-template-columns: repeat(5, 1fr);
 
-    padding: 17px 10px calc(15px + env(safe-area-inset-bottom));
+    padding: 17px 10px
+        calc(15px + env(safe-area-inset-bottom));
 
     backdrop-filter: blur(12px);
 
@@ -375,9 +376,13 @@ BOTTOM NAV
 }
 
 
+/* =========================
+   BOTTOM NAV LINKS
+========================= */
+
 .bottom-nav a {
 
-    color: var(--gold); /* Sabhi buttons gold color me rahenge */
+    color: var(--gold);
 
     text-decoration: none;
 
@@ -409,17 +414,38 @@ BOTTOM NAV
 
 .bottom-nav a:hover {
 
-    opacity: 0.8; /* Hover karne par halka sa glow/opacity effect */
+    opacity: 0.8;
 
 }
 
+
 /* =========================
-RESPONSIVE
+   PAGE
+   PURE 20px PADDING
+========================= */
+
+.page {
+
+    width: 100%;
+
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    padding: 20px;
+
+}
+
+
+/* =========================
+   RESPONSIVE
 ========================= */
 
 @media (max-width: 420px) {
 
     .page {
+
+        width: 100%;
 
         padding: 20px;
 
@@ -436,7 +462,7 @@ RESPONSIVE
     .rate-table th,
     .rate-table td {
 
-        padding: 20px 20px;
+        padding: 12px 10px;
 
     }
 
@@ -454,12 +480,75 @@ RESPONSIVE
 
     }
 
+
+    .bottom-nav {
+
+        width: calc(100% - 40px);
+
+        min-height: 72px;
+
+        margin-bottom: 10px;
+
+        border-radius: 16px;
+
+        padding-left: 5px;
+
+        padding-right: 5px;
+
+    }
+
+
+    .bottom-nav a {
+
+        font-size: 11px;
+
+    }
+
+
+    .bottom-nav a i {
+
+        font-size: 17px;
+
+    }
+
 }
 
+
+/* =========================
+   TABLET
+========================= */
+
+@media (min-width: 421px) and (max-width: 799px) {
+
+    .page {
+
+        width: 100%;
+
+        padding: 20px;
+
+    }
+
+
+    .bottom-nav {
+
+        width: calc(100% - 40px);
+
+    }
+
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
 
 @media (min-width: 800px) {
 
     .page {
+
+        width: 100%;
+
+        max-width: 900px;
 
         padding: 20px;
 
@@ -469,7 +558,7 @@ RESPONSIVE
     .rate-table th,
     .rate-table td {
 
-        padding: 20px 20px;
+        padding: 14px 20px;
 
     }
 
