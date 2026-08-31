@@ -186,23 +186,19 @@ BOTTOM NAV
 
     transform: translateX(-50%);
 
-    width: min(1050px, 100%);
+    width: min(900px, 100%);
 
     min-height: 72px;
 
-    background: #111827;
+    background: #162032;
 
-    border-top:
-        1px solid rgba(255,255,255,.08);
+    border-top: 1px solid rgba(255,255,255,.08);
 
     display: grid;
 
-    grid-template-columns:
-        repeat(5, 1fr);
+    grid-template-columns: repeat(5, 1fr);
 
-    padding:
-        17px 10px
-        calc(15px + env(safe-area-inset-bottom));
+    padding: 17px 10px calc(15px + env(safe-area-inset-bottom));
 
     backdrop-filter: blur(12px);
 
@@ -210,14 +206,12 @@ BOTTOM NAV
 
     margin-bottom: 15px;
 
-
-
 }
 
 
 .bottom-nav a {
 
-    color: #777;
+    color: var(--gold); /* Sabhi buttons gold color me rahenge */
 
     text-decoration: none;
 
@@ -229,11 +223,13 @@ BOTTOM NAV
 
     justify-content: center;
 
-    gap: 2px;
+    gap: 5px;
 
-    font-size: 16px;
+    font-size: 12px;
 
     border-radius: 12px;
+
+    transition: opacity 0.3s ease;
 
 }
 
@@ -245,11 +241,77 @@ BOTTOM NAV
 }
 
 
-.bottom-nav a.active {
+.bottom-nav a:hover {
 
-    color: var(--gold);
+    opacity: 0.8; /* Hover karne par halka sa glow/opacity effect */
 
-    background:
-        /* rgba(206, 206, 205, 0.08); */
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media (max-width: 420px) {
+
+    .page {
+
+        padding: 20px;
+
+    }
+
+
+    .header-title h1 {
+
+        font-size: 17px;
+
+    }
+
+
+    .rate-table th,
+    .rate-table td {
+
+        padding: 20px 20px;
+
+    }
+
+
+    .rate-table td {
+
+        font-size: 12px;
+
+    }
+
+
+    .market-note p {
+
+        font-size: 9px;
+
+    }
+
+}
+
+
+@media (min-width: 800px) {
+
+    .page {
+
+        padding: 20px;
+
+    }
+
+
+    .rate-table th,
+    .rate-table td {
+
+        padding: 20px 20px;
+
+    }
+
+
+    .rate-table td {
+
+        font-size: 14px;
+
+    }
 
 }

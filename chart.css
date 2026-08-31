@@ -259,7 +259,6 @@ body {
     color: #ffffff;
 }
 
-
 /* =========================
 BOTTOM NAV
 ========================= */
@@ -276,23 +275,19 @@ BOTTOM NAV
 
     transform: translateX(-50%);
 
-    width: min(1050px, 100%);
+    width: min(900px, 100%);
 
     min-height: 72px;
 
-    background: #111827;
+    background: #162032;
 
-    border-top:
-        1px solid rgba(255,255,255,.08);
+    border-top: 1px solid rgba(255,255,255,.08);
 
     display: grid;
 
-    grid-template-columns:
-        repeat(5, 1fr);
+    grid-template-columns: repeat(5, 1fr);
 
-    padding:
-        17px 10px
-        calc(15px + env(safe-area-inset-bottom));
+    padding: 17px 10px calc(15px + env(safe-area-inset-bottom));
 
     backdrop-filter: blur(12px);
 
@@ -300,14 +295,12 @@ BOTTOM NAV
 
     margin-bottom: 15px;
 
-
-
 }
 
 
 .bottom-nav a {
 
-    color: #777;
+    color: var(--gold); /* Sabhi buttons gold color me rahenge */
 
     text-decoration: none;
 
@@ -319,11 +312,13 @@ BOTTOM NAV
 
     justify-content: center;
 
-    gap: 2px;
+    gap: 5px;
 
-    font-size: 16px;
+    font-size: 12px;
 
     border-radius: 12px;
+
+    transition: opacity 0.3s ease;
 
 }
 
@@ -335,110 +330,77 @@ BOTTOM NAV
 }
 
 
-.bottom-nav a.active {
+.bottom-nav a:hover {
 
-    color: var(--gold);
-
-    background:
-        /* rgba(206, 206, 205, 0.08); */
+    opacity: 0.8; /* Hover karne par halka sa glow/opacity effect */
 
 }
 
+/* =========================
+RESPONSIVE
+========================= */
 
+@media (max-width: 420px) {
 
-/* ========================================
-   TABLET & MOBILE RESPONSIVE
-======================================== */
+    .page {
 
-@media (max-width: 768px) {
-    .container {
-        padding: 14px;
+        padding: 20px;
+
     }
 
-    .tradingview-widget-container {
-        height: 500px;
-    }
-
-    .market-info {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 500px) {
-    body {
-        padding-bottom: 85px;
-    }
-
-    .container {
-        padding: 10px;
-    }
-
-    .header {
-        padding: 13px;
-        border-radius: 15px;
-    }
-
-    .back-btn {
-        width: 40px;
-        height: 40px;
-    }
 
     .header-title h1 {
-        font-size: 18px;
+
+        font-size: 17px;
+
     }
 
-    .header-title p {
-        font-size: 10px;
+
+    .rate-table th,
+    .rate-table td {
+
+        padding: 20px 20px;
+
     }
 
-    .live-dot {
+
+    .rate-table td {
+
+        font-size: 12px;
+
+    }
+
+
+    .market-note p {
+
         font-size: 9px;
+
     }
 
-    .gold-info {
-        padding: 14px;
-        border-radius: 15px;
+}
+
+
+@media (min-width: 800px) {
+
+    .page {
+
+        padding: 20px;
+
     }
 
-    .gold-icon {
-        width: 42px;
-        height: 42px;
-        font-size: 18px;
+
+    .rate-table th,
+    .rate-table td {
+
+        padding: 20px 20px;
+
     }
 
-    .gold-info h2 {
-        font-size: 16px;
+
+    .rate-table td {
+
+        font-size: 14px;
+
     }
 
-    .chart-section {
-        padding: 10px;
-        border-radius: 16px;
-    }
-
-    .chart-header {
-        padding: 4px 4px 12px;
-    }
-
-    .chart-header h2 {
-        font-size: 16px;
-    }
-
-    .tradingview-widget-container {
-        height: 430px;
-        border-radius: 10px;
-    }
-
-    .info-card {
-        padding: 13px;
-    }
-
-    .bottom-nav {
-        bottom: 10px;
-        width: calc(100% - 20px);
-        height: 64px;
-    }
-
-    .nav-item {
-        min-width: 58px;
-    }
 }
