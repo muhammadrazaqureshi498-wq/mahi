@@ -23,318 +23,63 @@ body {
 }
 
 /* ===========================
-   HEADER
+   Header
 =========================== */
 
 .header {
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
     background: #192334;
-
     border: 1px solid rgba(255, 255, 255, .1);
-
     border-radius: 20px;
-
     padding: 20px 30px;
-
     margin-bottom: 25px;
-
 }
-
-
-/* ===========================
-   LOGO BOX
-=========================== */
 
 .logo-box {
-
     display: flex;
-
     align-items: center;
-
     gap: 18px;
-
 }
-
-
-/* ===========================
-   LOGO
-=========================== */
 
 .logo {
-
     width: 65px;
     height: 65px;
-
     border-radius: 50%;
-
-    overflow: hidden;
-
+    background: linear-gradient(135deg, #FFD700, #C8A200);
     display: flex;
     justify-content: center;
     align-items: center;
-
-    /* background: #192334; */
-
-    /* border: 2px solid #FFD700; */
-
-    flex-shrink: 0;
-
+    color: #111;
+    font-size: 28px;
 }
-
-.logo img {
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    display: block;
-
-}
-
-
-/* ===========================
-   HEADING
-=========================== */
 
 .heading h1 {
-
     font-size: 28px;
-
     font-weight: 700;
-
     color: #FFD700;
-
-    margin: 0;
-
 }
-
 
 .heading p {
-
     color: #cbd5e1;
-
     margin-top: 4px;
-
-    font-size: 14px;
-
 }
-
-
-/* ===========================
-   REFRESH BUTTON
-=========================== */
 
 .refresh-btn {
-
     width: 55px;
-
     height: 55px;
-
     border: none;
-
     border-radius: 50%;
-
     background: #FFD700;
-
     color: #111;
-
     cursor: pointer;
-
     font-size: 20px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
     transition: .3s;
-
 }
-
 
 .refresh-btn:hover {
-
     transform: rotate(180deg);
-
-}
-
-
-/* ===========================
-   TABLET
-=========================== */
-
-@media (max-width: 700px) {
-
-    .header {
-
-        padding: 18px 20px;
-
-        border-radius: 18px;
-
-    }
-
-
-    .logo {
-
-        width: 58px;
-
-        height: 58px;
-
-    }
-
-
-    .logo-box {
-
-        gap: 14px;
-
-    }
-
-
-    .heading h1 {
-
-        font-size: 23px;
-
-    }
-
-
-    .heading p {
-
-        font-size: 12px;
-
-    }
-
-
-    .refresh-btn {
-
-        width: 48px;
-
-        height: 48px;
-
-        font-size: 17px;
-
-    }
-
-}
-
-
-/* ===========================
-   MOBILE
-=========================== */
-
-@media (max-width: 480px) {
-
-    .header {
-
-        padding: 15px;
-
-        margin-bottom: 20px;
-
-        border-radius: 16px;
-
-    }
-
-
-    .logo-box {
-
-        gap: 10px;
-
-    }
-
-
-    .logo {
-
-        width: 48px;
-
-        height: 48px;
-
-        border-width: 1.5px;
-
-    }
-
-
-    .heading h1 {
-
-        font-size: 18px;
-
-    }
-
-
-    .heading p {
-
-        font-size: 9px;
-
-        margin-top: 2px;
-
-    }
-
-
-    .refresh-btn {
-
-        width: 40px;
-
-        height: 40px;
-
-        font-size: 14px;
-
-    }
-
-}
-
-
-/* ===========================
-   SMALL MOBILE
-=========================== */
-
-@media (max-width: 360px) {
-
-    .header {
-
-        padding: 12px;
-
-    }
-
-
-    .logo {
-
-        width: 43px;
-
-        height: 43px;
-
-    }
-
-
-    .heading h1 {
-
-        font-size: 16px;
-
-    }
-
-
-    .heading p {
-
-        font-size: 8px;
-
-    }
-
-
-    .refresh-btn {
-
-        width: 36px;
-
-        height: 36px;
-
-        font-size: 13px;
-
-    }
-
 }
 
 /* ===========================
@@ -592,7 +337,7 @@ body {
 
 
 /* =========================
-   BOTTOM NAV
+BOTTOM NAV
 ========================= */
 
 .bottom-nav {
@@ -607,7 +352,7 @@ body {
 
     transform: translateX(-50%);
 
-    width: min(900px, calc(100% - 40px));
+    width: min(900px, 100%);
 
     min-height: 72px;
 
@@ -619,8 +364,7 @@ body {
 
     grid-template-columns: repeat(5, 1fr);
 
-    padding: 17px 10px
-        calc(15px + env(safe-area-inset-bottom));
+    padding: 17px 10px calc(15px + env(safe-area-inset-bottom));
 
     backdrop-filter: blur(12px);
 
@@ -631,13 +375,9 @@ body {
 }
 
 
-/* =========================
-   BOTTOM NAV LINKS
-========================= */
-
 .bottom-nav a {
 
-    color: var(--gold);
+    color: var(--gold); /* Sabhi buttons gold color me rahenge */
 
     text-decoration: none;
 
@@ -669,38 +409,17 @@ body {
 
 .bottom-nav a:hover {
 
-    opacity: 0.8;
+    opacity: 0.8; /* Hover karne par halka sa glow/opacity effect */
 
 }
 
-
 /* =========================
-   PAGE
-   PURE 20px PADDING
-========================= */
-
-.page {
-
-    width: 100%;
-
-    max-width: 900px;
-
-    margin: 0 auto;
-
-    padding: 20px;
-
-}
-
-
-/* =========================
-   RESPONSIVE
+RESPONSIVE
 ========================= */
 
 @media (max-width: 420px) {
 
     .page {
-
-        width: 100%;
 
         padding: 20px;
 
@@ -717,7 +436,7 @@ body {
     .rate-table th,
     .rate-table td {
 
-        padding: 12px 10px;
+        padding: 20px 20px;
 
     }
 
@@ -735,75 +454,12 @@ body {
 
     }
 
-
-    .bottom-nav {
-
-        width: calc(100% - 40px);
-
-        min-height: 72px;
-
-        margin-bottom: 10px;
-
-        border-radius: 16px;
-
-        padding-left: 5px;
-
-        padding-right: 5px;
-
-    }
-
-
-    .bottom-nav a {
-
-        font-size: 11px;
-
-    }
-
-
-    .bottom-nav a i {
-
-        font-size: 17px;
-
-    }
-
 }
 
-
-/* =========================
-   TABLET
-========================= */
-
-@media (min-width: 421px) and (max-width: 799px) {
-
-    .page {
-
-        width: 100%;
-
-        padding: 20px;
-
-    }
-
-
-    .bottom-nav {
-
-        width: calc(100% - 40px);
-
-    }
-
-}
-
-
-/* =========================
-   DESKTOP
-========================= */
 
 @media (min-width: 800px) {
 
     .page {
-
-        width: 100%;
-
-        max-width: 900px;
 
         padding: 20px;
 
@@ -813,7 +469,7 @@ body {
     .rate-table th,
     .rate-table td {
 
-        padding: 14px 20px;
+        padding: 20px 20px;
 
     }
 
