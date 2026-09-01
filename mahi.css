@@ -1153,7 +1153,7 @@ body {
 
 .market-note {
     width: 100%;
-    overflow: hidden;
+    overflow: scroll;
 
     background: #171b08;
 
@@ -1181,7 +1181,7 @@ body {
 
     width: max-content;
 
-    animation: marketNoteMove 18s linear infinite;
+    animation: marketNoteMove 1s linear infinite;
 }
 
 
