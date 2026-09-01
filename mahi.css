@@ -1153,7 +1153,7 @@ body {
 
 .market-note {
     width: 100%;
-    overflow:auto;
+    overflow: hidden;
 
     background: #171b08;
 
