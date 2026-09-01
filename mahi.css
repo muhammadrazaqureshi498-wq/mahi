@@ -44,15 +44,7 @@ body {
 }
 
 .logo {
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #FFD700, #C8A200);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #111;
-    font-size: 28px;
+    
 }
 
 .heading h1 {
