@@ -134,7 +134,7 @@ refreshBtn.addEventListener("click", async () => {
 
     updateLastUpdated();
 
-    refreshBtn.innerHTML = "";
+    refreshBtn.innerHTML = "Refresh";
 
     refreshBtn.disabled = false;
 
