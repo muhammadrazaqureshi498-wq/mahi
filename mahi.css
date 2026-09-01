@@ -1226,7 +1226,7 @@ body {
 @media (max-width: 600px) {
 
     .market-note {
-        padding: 10px 0;
+        padding: 20px 0;
     }
 
     .market-note-track {
@@ -1519,7 +1519,7 @@ body {
 
         max-width: 900px;
 
-        padding: 0;
+        padding: 20;
 
     }
 
@@ -1542,7 +1542,7 @@ body {
 
         width: 100%;
 
-        padding: 0 10px;
+        padding: 20 10px;
 
         margin-top: 20px;
 
