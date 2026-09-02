@@ -1,7 +1,12 @@
 /* ========================================
    MAHI GOLD RATE
-   TRADINGVIEW CHART
-   DARK THEME
+   GOLD CHART
+   RESPONSIVE DARK THEME
+======================================== */
+
+
+/* ========================================
+   RESET
 ======================================== */
 
 * {
@@ -10,258 +15,533 @@
     box-sizing: border-box;
 }
 
+
+/* ========================================
+   BODY
+======================================== */
+
 body {
+
     font-family: "Poppins", sans-serif;
+
     background: #0b0f19;
+
     color: #f3f4f6;
+
     min-height: 100vh;
-    padding-bottom: 90px;
+
+    padding-bottom: 110px;
+
+    overflow-x: hidden;
+
 }
 
+
+/* ========================================
+   MAIN CONTAINER
+======================================== */
+
 .container {
+
     width: 100%;
+
     max-width: 1100px;
-    margin: auto;
+
+    margin: 0 auto;
+
     padding: 20px;
+
+    overflow: hidden;
+
 }
+
 
 /* ========================================
    HEADER
 ======================================== */
 
 .header {
+
+    width: 100%;
+
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
+
     background: #161f30;
+
     border: 1px solid #233148;
+
     border-radius: 18px;
+
     padding: 16px 20px;
+
     margin-bottom: 18px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.4);
+
 }
+
 
 .back-btn {
+
     width: 44px;
+
     height: 44px;
+
+    flex-shrink: 0;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     text-decoration: none;
+
     color: #e5e7eb;
+
     background: #233148;
+
     border-radius: 12px;
-    transition: 0.3s;
+
+    transition: .3s;
+
 }
+
 
 .back-btn:hover {
+
     background: #d4af37;
+
     color: #ffffff;
+
 }
+
 
 .header-title {
+
     text-align: center;
+
+    min-width: 0;
+
 }
+
 
 .header-title h1 {
+
     font-size: 22px;
+
     font-weight: 600;
+
     color: #ffffff;
+
 }
+
 
 .header-title p {
+
     font-size: 12px;
+
     color: #9ca3af;
+
     margin-top: 2px;
+
 }
+
 
 .live-dot {
+
     display: flex;
+
     align-items: center;
+
     gap: 6px;
+
+    flex-shrink: 0;
+
     font-size: 11px;
+
     font-weight: 600;
+
     color: #4ade80;
+
 }
 
+
 .live-dot span {
+
     width: 8px;
+
     height: 8px;
+
+    flex-shrink: 0;
+
     border-radius: 50%;
+
     background: #22c55e;
-    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+
+    box-shadow:
+        0 0 0 4px rgba(34, 197, 94, .2);
+
 }
+
 
 /* ========================================
    GOLD INFO
 ======================================== */
 
 .gold-info {
+
+    width: 100%;
+
     background: #161f30;
+
     border: 1px solid #233148;
+
     border-radius: 18px;
+
     padding: 18px 20px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
+
+    gap: 15px;
+
     margin-bottom: 18px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, .3);
+
 }
+
 
 .gold-info-left {
+
     display: flex;
+
     align-items: center;
+
     gap: 13px;
+
+    min-width: 0;
+
 }
+
 
 .gold-icon {
+
     width: 48px;
+
     height: 48px;
+
+    flex-shrink: 0;
+
     border-radius: 14px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
-    background: rgba(212, 175, 55, 0.15);
+
+    background: rgba(212, 175, 55, .15);
+
     color: #facc15;
+
     font-size: 22px;
+
 }
+
 
 .gold-info h2 {
+
     font-size: 18px;
+
     font-weight: 600;
+
     color: #ffffff;
+
 }
+
 
 .gold-info p {
+
     color: #9ca3af;
+
     font-size: 12px;
+
 }
+
 
 .market-status {
+
     display: flex;
+
     align-items: center;
+
     gap: 7px;
+
     color: #4ade80;
+
     font-size: 12px;
+
     font-weight: 500;
+
+    white-space: nowrap;
+
 }
 
+
 .market-status span {
+
     width: 7px;
+
     height: 7px;
+
+    flex-shrink: 0;
+
     background: #22c55e;
+
     border-radius: 50%;
+
 }
+
 
 /* ========================================
    CHART SECTION
 ======================================== */
 
 .chart-section {
+
+    width: 100%;
+
     background: #161f30;
+
     border: 1px solid #233148;
+
     border-radius: 20px;
+
     padding: 18px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, .4);
+
+    overflow: hidden;
+
 }
+
 
 .chart-header {
+
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
+
+    gap: 10px;
+
     padding: 4px 4px 16px;
+
 }
+
 
 .chart-header h2 {
+
     font-size: 18px;
+
     font-weight: 600;
+
     color: #ffffff;
+
 }
+
 
 .chart-header p {
+
     font-size: 12px;
+
     color: #9ca3af;
+
     margin-top: 2px;
+
 }
 
+
 .chart-header i {
+
     width: 42px;
+
     height: 42px;
+
+    flex-shrink: 0;
+
     border-radius: 12px;
-    background: rgba(212, 175, 55, 0.15);
+
+    background: rgba(212, 175, 55, .15);
+
     color: #facc15;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
 }
+
 
 /* ========================================
    TRADINGVIEW
 ======================================== */
 
 .tradingview-widget-container {
-    width: 100%;
+
+    width: 100% !important;
+
+    max-width: 100% !important;
+
     height: 600px;
+
     border-radius: 14px;
+
     overflow: hidden;
+
     background: #0f172a;
+
 }
 
+
 .tradingview-widget-container__widget {
-    width: 100%;
-    height: 100%;
+
+    width: 100% !important;
+
+    max-width: 100% !important;
+
+    height: 100% !important;
+
 }
+
+
+/* Prevent TradingView iframe overflow */
+
+.tradingview-widget-container iframe {
+
+    width: 100% !important;
+
+    max-width: 100% !important;
+
+    border: 0 !important;
+
+}
+
 
 /* ========================================
    MARKET INFO
 ======================================== */
 
 .market-info {
+
+    width: 100%;
+
     display: grid;
+
     grid-template-columns: repeat(3, 1fr);
+
     gap: 15px;
+
     margin-top: 18px;
+
 }
+
 
 .info-card {
+
+    width: 100%;
+
+    min-width: 0;
+
     background: #161f30;
+
     border: 1px solid #233148;
+
     border-radius: 16px;
+
     padding: 16px;
+
     display: flex;
+
     align-items: center;
+
     gap: 12px;
-    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.3);
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, .3);
+
 }
+
 
 .info-icon {
+
     width: 40px;
+
     height: 40px;
+
+    flex-shrink: 0;
+
     border-radius: 11px;
-    background: rgba(212, 175, 55, 0.15);
+
+    background: rgba(212, 175, 55, .15);
+
     color: #facc15;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
 }
+
 
 .info-card span {
+
     display: block;
+
     color: #9ca3af;
+
     font-size: 11px;
+
 }
+
 
 .info-card strong {
+
     display: block;
+
     margin-top: 2px;
+
     font-size: 13px;
+
     font-weight: 600;
+
     color: #ffffff;
+
+    word-break: break-word;
+
 }
 
-/* =========================
-BOTTOM NAV
-========================= */
+
+/* ========================================
+   BOTTOM NAVIGATION
+======================================== */
 
 .bottom-nav {
 
@@ -275,32 +555,34 @@ BOTTOM NAV
 
     transform: translateX(-50%);
 
-    width: min(900px, 100%);
+    width: min(900px, calc(100% - 20px));
 
     min-height: 72px;
 
     background: #162032;
 
-    border-top: 1px solid rgba(255,255,255,.08);
+    border: 1px solid rgba(255, 255, 255, .08);
 
     display: grid;
 
     grid-template-columns: repeat(5, 1fr);
 
-    padding: 17px 10px calc(15px + env(safe-area-inset-bottom));
+    padding:
+        12px 8px
+        calc(12px + env(safe-area-inset-bottom));
 
     backdrop-filter: blur(12px);
 
     border-radius: 16px;
 
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 
 }
 
 
 .bottom-nav a {
 
-    color: var(--gold); /* Sabhi buttons gold color me rahenge */
+    color: #9ca3af;
 
     text-decoration: none;
 
@@ -312,13 +594,13 @@ BOTTOM NAV
 
     justify-content: center;
 
-    gap: 5px;
+    gap: 4px;
 
-    font-size: 12px;
+    font-size: 11px;
 
     border-radius: 12px;
 
-    transition: opacity 0.3s ease;
+    transition: .3s;
 
 }
 
@@ -330,21 +612,300 @@ BOTTOM NAV
 }
 
 
-.bottom-nav a:hover {
+.bottom-nav a.active {
 
-    opacity: 0.8; /* Hover karne par halka sa glow/opacity effect */
+    color: #facc15;
 
 }
 
-/* =========================
-RESPONSIVE
-========================= */
 
-@media (max-width: 420px) {
+.bottom-nav a:hover {
 
-    .page {
+    color: #facc15;
+
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 800px) {
+
+    .container {
 
         padding: 20px;
+
+    }
+
+
+    .market-info {
+
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+
+    }
+
+
+    .tradingview-widget-container {
+
+        height: 500px;
+
+    }
+
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+    body {
+
+        padding-bottom: 100px;
+
+    }
+
+
+    .container {
+
+        width: 100%;
+
+        padding: 20px;
+
+        margin: 0;
+
+    }
+
+
+    /* HEADER */
+
+    .header {
+
+        padding: 14px;
+
+        border-radius: 16px;
+
+        gap: 8px;
+
+    }
+
+
+    .back-btn {
+
+        width: 42px;
+
+        height: 42px;
+
+    }
+
+
+    .header-title {
+
+        flex: 1;
+
+    }
+
+
+    .header-title h1 {
+
+        font-size: 19px;
+
+    }
+
+
+    .header-title p {
+
+        font-size: 10px;
+
+    }
+
+
+    .live-dot {
+
+        font-size: 10px;
+
+    }
+
+
+    /* GOLD INFO */
+
+    .gold-info {
+
+        padding: 16px;
+
+        border-radius: 16px;
+
+    }
+
+
+    .gold-icon {
+
+        width: 44px;
+
+        height: 44px;
+
+        font-size: 20px;
+
+    }
+
+
+    .gold-info h2 {
+
+        font-size: 17px;
+
+    }
+
+
+    .gold-info p {
+
+        font-size: 11px;
+
+    }
+
+
+    .market-status {
+
+        font-size: 11px;
+
+    }
+
+
+    /* CHART */
+
+    .chart-section {
+
+        padding: 14px;
+
+        border-radius: 18px;
+
+    }
+
+
+    .chart-header {
+
+        padding: 3px 2px 13px;
+
+    }
+
+
+    .chart-header h2 {
+
+        font-size: 17px;
+
+    }
+
+
+    .chart-header p {
+
+        font-size: 11px;
+
+    }
+
+
+    .chart-header i {
+
+        width: 40px;
+
+        height: 40px;
+
+    }
+
+
+    .tradingview-widget-container {
+
+        width: 100% !important;
+
+        height: 430px;
+
+        border-radius: 12px;
+
+    }
+
+
+    /* INFO CARDS */
+
+    .market-info {
+
+        width: 100%;
+
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+
+    }
+
+
+    .info-card {
+
+        padding: 14px;
+
+        border-radius: 14px;
+
+    }
+
+
+    /* BOTTOM NAV */
+
+    .bottom-nav {
+
+        width: calc(100% - 20px);
+
+        min-height: 70px;
+
+        padding: 10px 5px;
+
+        margin-bottom: 8px;
+
+    }
+
+
+    .bottom-nav a {
+
+        font-size: 10px;
+
+        gap: 4px;
+
+    }
+
+
+    .bottom-nav a i {
+
+        font-size: 17px;
+
+    }
+
+}
+
+
+/* ========================================
+   SMALL MOBILE
+======================================== */
+
+@media (max-width: 400px) {
+
+    .container {
+
+        padding: 20px;
+
+    }
+
+
+    .header {
+
+        padding: 12px;
+
+    }
+
+
+    .back-btn {
+
+        width: 38px;
+
+        height: 38px;
 
     }
 
@@ -356,22 +917,113 @@ RESPONSIVE
     }
 
 
-    .rate-table th,
-    .rate-table td {
+    .header-title p {
 
-        padding: 20px 20px;
-
-    }
-
-
-    .rate-table td {
-
-        font-size: 12px;
+        font-size: 9px;
 
     }
 
 
-    .market-note p {
+    .live-dot {
+
+        font-size: 9px;
+
+    }
+
+
+    .live-dot span {
+
+        width: 7px;
+
+        height: 7px;
+
+    }
+
+
+    .gold-info {
+
+        padding: 14px;
+
+    }
+
+
+    .gold-info-left {
+
+        gap: 10px;
+
+    }
+
+
+    .gold-icon {
+
+        width: 42px;
+
+        height: 42px;
+
+        font-size: 18px;
+
+    }
+
+
+    .gold-info h2 {
+
+        font-size: 16px;
+
+    }
+
+
+    .gold-info p {
+
+        font-size: 10px;
+
+    }
+
+
+    .market-status {
+
+        font-size: 10px;
+
+    }
+
+
+    .chart-section {
+
+        padding: 12px;
+
+    }
+
+
+    .tradingview-widget-container {
+
+        height: 380px;
+
+    }
+
+
+    .info-card {
+
+        padding: 12px;
+
+    }
+
+
+    .info-icon {
+
+        width: 38px;
+
+        height: 38px;
+
+    }
+
+
+    .bottom-nav {
+
+        width: calc(100% - 20px);
+
+    }
+
+
+    .bottom-nav a {
 
         font-size: 9px;
 
@@ -380,26 +1032,64 @@ RESPONSIVE
 }
 
 
-@media (min-width: 800px) {
+/* ========================================
+   EXTRA SMALL
+======================================== */
 
-    .page {
+@media (max-width: 340px) {
+
+    .container {
 
         padding: 20px;
 
     }
 
 
-    .rate-table th,
-    .rate-table td {
+    .header-title h1 {
 
-        padding: 20px 20px;
+        font-size: 15px;
 
     }
 
 
-    .rate-table td {
+    .header-title p {
 
-        font-size: 14px;
+        display: none;
+
+    }
+
+
+    .live-dot {
+
+        font-size: 8px;
+
+    }
+
+
+    .gold-info {
+
+        padding: 12px;
+
+    }
+
+
+    .market-status {
+
+        font-size: 9px;
+
+    }
+
+
+    .tradingview-widget-container {
+
+        height: 350px;
+
+    }
+
+
+    .bottom-nav a span {
+
+        font-size: 8px;
 
     }
 
